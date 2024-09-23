@@ -18,9 +18,21 @@
   z-index: 1000;
 }
 
-.logo img {
-  height: 40px;
-  width: auto;
+.logo {
+  display: flex;
+  flex-direction: column; /* Stack logo text */
+  align-items: flex-start; /* Align left */
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px; /* Adjust as needed */
+}
+
+.logo p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
 }
 
 .nav-links {
@@ -49,13 +61,16 @@
   align-items: center;
 }
 
+.search-bar-container {
+  position: relative; /* Allows absolute positioning of the button */
+}
+
 .search-bar {
-  padding: 8px 15px;
+  padding: 8px 40px 8px 15px; /* Space for the icon */
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 200px;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .search-bar:focus {
@@ -67,59 +82,51 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
   position: absolute;
-  right: 15px;
+  right: 10px; /* Adjust as needed */
   top: 50%;
   transform: translateY(-50%);
 }
 
 .search-button img {
-  width: 16px;
-  height: 16px;
+  width: 20px; /* Increase size */
+  height: 20px; /* Increase size */
 }
 
 /* Content Split */
 .login-page-content {
   display: flex;
   flex: 1;
-  justify-content: center; /* Center both sections */
-  align-items: center; /* Vertically center both sections */
-  padding: 0 50px;
-  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
 }
 
-/* Left Section (Image Section) */
+/* Left Section (Solid Blue Background) */
 .login-left-section {
-  flex: 0.4; /* Adjusted width */
-  background-color: #007bff;
+  flex: 0.5;
+  background-color: #007bff; /* Solid blue */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border-radius: 15px 0 0 15px; /* Rounded left corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  height: 80%; /* Ensures equal height to right section */
 }
 
 .login-image {
-  width: 100%; /* Make the image fit the section */
+  width: 80%;
   height: auto;
   border-radius: 15px;
 }
 
-/* Right Section (Sign-in Form) */
+/* Right Section (White) */
 .login-right-section {
-  flex: 0.6; /* Adjusted width to make the form section wider */
+  flex: 0.5;
   background-color: #fff;
   padding: 50px 40px;
-  border-radius: 0 15px 15px 0; /* Rounded right corners */
+  border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70%; /* Ensures equal height to left section */
 }
 
 .login-form-container {
@@ -209,20 +216,6 @@
     align-items: flex-start;
   }
   .search-container {
-    margin-left: 0;
-  }
-  .login-page-content {
-    flex-direction: column;
-    padding: 0 20px;
-  }
-  .login-left-section {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    height: auto;
-  }
-  .login-right-section {
     margin-left: 0;
   }
 }
