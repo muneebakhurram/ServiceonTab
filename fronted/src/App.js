@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login'; // Adjust the path if necessary
+import Consumersignup from './pages/Consumersignup'; // Adjust the path if necessary
+import './App.css'; // Your CSS file for styling
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   
+      <Router>
+        <div className="App">
+          {/* You can include a common header or navigation bar here if needed */}
+          <Routes>
+          
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/consumersignup" element={<Consumersignup />} />
+        
+          </Routes>
+        </div>
+      </Router>
+   
   );
 }
 

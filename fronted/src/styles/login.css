@@ -96,37 +96,35 @@
 /* Content Split */
 .login-page-content {
   display: flex;
-  flex: 1;
-  overflow: hidden;
-  justify-content: space-between;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full height of the viewport */
 }
 
-/* Left Section (Solid Blue Background) */
+/* Left Section (Solid Background) */
 .login-left-section {
-  flex: 0.5;
-  background-color: #007bff; /* Solid blue */
+  flex: 0 0 40% !important; /* Reduced width */
+  background-color: #fff !important; /* Background color */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  border-radius: 15px 0 0 15px; /* Rounded corners for left side */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow */
+  height: 85% !important;
 }
 
-.login-image {
-  width: 80%;
-  height: auto;
-  border-radius: 15px;
-}
-
-/* Right Section (White) */
+/* Right Section (Solid Blue Background) */
 .login-right-section {
-  flex: 0.5;
-  background-color: #fff;
+  flex: 0 0 40% !important; /* Reduced width */
+  background-color: #007bff !important; /* Background color */
   padding: 50px 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0 15px 15px 0; /* Rounded corners for right side */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow */
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 75% !important;
 }
 
 .login-form-container {
@@ -176,34 +174,13 @@
 .login-button {
   width: 100%;
   padding: 14px;
-  background-color: #007bff;
+  background-color: #0056b3 !important;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-
-/* Already have an account text */
-.account-exists-text {
-  margin-top: 20px;
-  color: #666;
-  font-size: 14px;
-}
-
-/* Link Styling */
-.login-link {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.login-link:hover {
-  text-decoration: underline;
 }
 
 /* Responsive Design */
@@ -217,5 +194,12 @@
   }
   .search-container {
     margin-left: 0;
+  }
+
+  .login-left-section,
+  .login-right-section {
+    width: 60%; /* Increase width for smaller screens */
+    border-radius: 15px; /* Full rounded corners */
+    margin-bottom: 20px; /* Add space between sections */
   }
 }

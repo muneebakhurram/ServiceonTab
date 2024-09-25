@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/login.css'; // Ensure your CSS has the necessary styles
 import loginImage from '../assests/images/login.jpeg'; // Adjust the path if necessary
+import axios from 'axios'; // Import Axios for API calls
 
 export const LoginPageConsumer = () => {
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setErrorMessage(""); // Reset error message
+
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Invalid email format.");
+      return;
+    }
+
+    try {
+      // Make API call to login
+      const response = await axios.post('http://localhost:5000/api/Auth/login', {
+        email,  // Only email and password are required for login
+        password,
+      });
+
+      // Handle successful login
+      console.log(response.data);
+      // Redirect or perform any action upon successful login
+    } catch (error) {
+      // Handle error response
+      if (error.response) {
+        // Check for specific error messages from the backend
+        setErrorMessage(error.response.data.message || "Login failed. Please try again.");
+      } else {
+        setErrorMessage("Network error. Please try again.");
+      }
+    }
+  };
+
   return (
     <div className="login-page-consumer">
       {/* Header Section */}
@@ -43,16 +80,28 @@ export const LoginPageConsumer = () => {
         <div className="login-right-section">
           <div className="login-form-container">
             <h2 className="login-title">Ready to Continue? Sign In Here!</h2>
-            <div className="form-group">
-              <input className="input" placeholder="Email" type="email" />
-            </div>
-            <div className="form-group">
-              <input className="input" placeholder="Password" type="password" />
-            </div>
-            <button className="login-button">Login</button>
-            <p className="account-exists-text">
-              Already have an account? <a href="/login" className="login-link">Log In</a>
-            </p>
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
+            <form onSubmit={handleLogin}> {/* Form submission handling */}
+              <div className="form-group">
+                <input
+                  className="input"
+                  placeholder="Email"
+                  type="email"
+                  value={email} // Controlled input
+                  onChange={(e) => setEmail(e.target.value)} // Update email state
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="input"
+                  placeholder="Password"
+                  type="password"
+                  value={password} // Controlled input
+                  onChange={(e) => setPassword(e.target.value)} // Update password state
+                />
+              </div>
+              <button type="submit" className="login-button">Login</button>
+            </form>
           </div>
         </div>
       </div>
