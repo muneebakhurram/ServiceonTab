@@ -6,7 +6,6 @@ import axios from 'axios';
 import Header from "../component/Header"; // Import the Header component
 import Footer from "../component/Footer"; // Import the Footer component
 
-
 export const ConsumerSignup = () => {
   const navigate = useNavigate(); 
   const [name, setName] = useState('');
@@ -33,7 +32,7 @@ export const ConsumerSignup = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/Auth/createuser', formData);
       if (response.data.success) {
-        setSuccess("Consumer created successfully! Please check your email for verification.");
+        setSuccess("Consumer created successfully!"); // Removed the verification message
         setError(''); 
         navigate('/login'); // Redirect to login page after successful signup
       }

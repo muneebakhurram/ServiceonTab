@@ -1,4 +1,5 @@
-const mongoose = require('mongoose'); // Import mongoose
+// models/User.js
+const mongoose = require('mongoose');
 
 // Define the consumer schema
 const ConsumerSchema = new mongoose.Schema({
@@ -7,8 +8,6 @@ const ConsumerSchema = new mongoose.Schema({
     password: { type: String, required: true },
     phonenumber: { type: String, required: true },
     address: { type: String, required: true },
-    verified: { type: Boolean, default: false }, // Add this line
-    verificationToken: { type: String } // Add this line to store the token
 });
 
 // Create the model from the schema
