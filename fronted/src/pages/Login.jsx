@@ -1,21 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import '../styles/login.css'; // Ensure your CSS has the necessary styles
-import loginImage from '../assests/images/login.jpeg'; // Adjust the path if necessary
+import loginImage from '../assests/images/login.jpeg'; // Corrected path
 import axios from 'axios'; // Import Axios for API calls
+import HeaderLogin from "../component/HeaderLogin"; // Import the Header component
+import Footer from "../component/Footer"; // Import the Footer component
 
 export const LoginPageConsumer = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [email, setEmail] = useState(""); // State for email
   const [password, setPassword] = useState(""); // State for password
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [loading, setLoading] = useState(false); // State for loading status
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent default form submission
     setErrorMessage(""); // Reset error message
+    setLoading(true); // Set loading to true
 
     // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setErrorMessage("Invalid email format.");
+      setLoading(false); // Reset loading state
       return;
     }
 
@@ -28,47 +35,35 @@ export const LoginPageConsumer = () => {
 
       // Handle successful login
       console.log(response.data);
-      // Redirect or perform any action upon successful login
+      // Redirect to HomePage on successful login
+      if (response.data.success) {
+        navigate('/Homepage'); // Adjust this path if needed
+      } else {
+        setErrorMessage("Login failed. Please check your credentials.");
+      }
     } catch (error) {
       // Handle error response
       if (error.response) {
         // Check for specific error messages from the backend
-        setErrorMessage(error.response.data.message || "Login failed. Please try again.");
+        if (error.response.data.message === "Email not verified or not registered.") {
+          setErrorMessage("Please verify your email before logging in.");
+        } else {
+          setErrorMessage(error.response.data.message || "Login failed. Please try again.");
+        }
       } else {
         setErrorMessage("Network error. Please try again.");
       }
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
   return (
     <div className="login-page-consumer">
       {/* Header Section */}
-      <header className="login-header">
-        <div className="logo">
-          <h1 style={{ margin: 0, fontSize: '24px' }}>
-            <span style={{ color: 'black' }}>Service</span>
-            <span style={{ color: 'black' }}> on </span>
-            <span style={{ color: '#007bff' }}>Tab</span>
-          </h1>
-          <p style={{ margin: 0, fontSize: '16px', color: '#333' }}>Maintain and Repair</p>
-        </div>
-        <nav className="nav-links">
-          <a href="#">Home</a>
-          <a href="#">Services</a>
-          <a href="#">FAQ</a>
-          <a href="#">Contact us</a>
-          <a href="#">About us</a>
-        </nav>
-        <div className="search-container">
-          <div className="search-bar-container">
-            <input type="text" placeholder="Search here" className="search-bar" />
-            <button className="search-button">
-              <img src={require('../assests/images/search.png')} alt="Search" />
-            </button>
-          </div>
-        </div>
-      </header>
-
+      <HeaderLogin />
+      <br />
+      <br />
       {/* Main Content */}
       <div className="login-page-content">
         {/* Left Section */}
@@ -83,28 +78,37 @@ export const LoginPageConsumer = () => {
             {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
             <form onSubmit={handleLogin}> {/* Form submission handling */}
               <div className="form-group">
+                <label>Email</label>
                 <input
                   className="input"
-                  placeholder="Email"
+                  placeholder="Enter your email"
                   type="email"
                   value={email} // Controlled input
                   onChange={(e) => setEmail(e.target.value)} // Update email state
+                  required
                 />
               </div>
               <div className="form-group">
+                <label>Password</label>
                 <input
                   className="input"
-                  placeholder="Password"
+                  placeholder="Enter your password"
                   type="password"
                   value={password} // Controlled input
                   onChange={(e) => setPassword(e.target.value)} // Update password state
+                  required
                 />
               </div>
-              <button type="submit" className="login-button">Login</button>
+              <button type="submit" className="login-button" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
             </form>
           </div>
         </div>
       </div>
+
+      {/* Footer Section */}
+      <Footer /> {/* Include the Footer component */}
     </div>
   );
 };
