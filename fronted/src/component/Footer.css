@@ -8,8 +8,8 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 40px; /* Add white space before the footer starts */
-    margin-left: -35px !important;
-    margin-right: -35px !important;
+    margin-left: -75px !important;
+    margin-right: -75px !important;
 }
 
 .footer-content {

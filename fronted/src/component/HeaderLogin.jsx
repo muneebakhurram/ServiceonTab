@@ -5,27 +5,26 @@ import "./Header.css";
 
 const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">
-                <img src={logo} alt="Service on Tab" />
+        <header className="header d-flex justify-content-between align-items-center p-3">
+            <div className="logo d-flex align-items-center">
+                <img src={logo} alt="Service on Tab" className="logo-image" />
                 <div className="logo-text">
                     <h1>Service on <span className="highlight">Tab</span></h1>
                     <p>Repair and maintain</p>
                 </div>
             </div>
-            <nav className="navigation">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact Us</a>
+            <nav className="navigation d-flex">
+                <a href="#home" className="nav-link">Home</a>
+                <a href="#services" className="nav-link">Services</a>
+                <a href="#faq" className="nav-link">FAQ</a>
+                <a href="#contact" className="nav-link">Contact Us</a>
             </nav>
-            <div className="search-login">
-                <div className="search-box">
-                    <input type="text" placeholder="Search..." />
-                    <img src={searchIcon} alt="Search" className="search-icon" />
+            <div className="search-login d-flex align-items-center">
+                <div className="search-box position-relative">
+                    <input type="text" placeholder="Search..." className="form-control" />
+                    <img src={searchIcon} alt="Search" className="search-icon position-absolute" />
                 </div>
-                <button className="become-provider-btn">Become a Provider</button>
-                {/* Removed the Login button */}
+                <button className="btn btn-outline-primary ml-2">Become a Provider</button>
             </div>
         </header>
     );

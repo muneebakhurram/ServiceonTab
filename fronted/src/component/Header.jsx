@@ -19,13 +19,13 @@ const Header = () => {
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact Us</a>
             </nav>
-            <div className="search-login">
+            <div className="search-login d-flex align-items-center">
                 <div className="search-box">
                     <input type="text" placeholder="Search..." />
                     <img src={searchIcon} alt="Search" className="search-icon" />
                 </div>
-                <button className="become-provider-btn">Become a Provider</button>
-                <button onClick={() => window.location.href='/login'}>Login</button>
+                <button className="btn btn-outline-primary become-provider-btn">Become a Provider</button>
+                <button className="btn btn-primary" onClick={() => window.location.href='/login'}>Login</button>
             </div>
         </header>
     );

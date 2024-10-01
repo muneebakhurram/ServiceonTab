@@ -26,7 +26,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
 }
 
 .logo-text .highlight {
@@ -59,7 +58,7 @@
 .search-login {
   display: flex;
   align-items: center;
-  gap: 20px; 
+  gap: 10px; /* Space between search and buttons */
 }
 
 .search-box {
@@ -81,19 +80,17 @@
   height: 16px;
 }
 
+.btn {
+  white-space: nowrap; /* Prevent text from breaking into new lines */
+  padding: 10px 20px;  /* Adjust padding to control button size */
+  font-size: 14px; /* Adjust button text size */
+}
+
 button {
-  padding: 10px 20px; 
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 25px; 
-  cursor: pointer;
-  font-size: 16px; 
   transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 button:hover {
-  background-color: #0056b3;
   transform: scale(1.05); 
 }
 

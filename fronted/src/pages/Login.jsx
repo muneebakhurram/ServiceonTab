@@ -1,50 +1,42 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
-import '../styles/login.css'; // Ensure your CSS has the necessary styles
-import loginImage from '../assests/images/login.jpeg'; // Corrected path
-import axios from 'axios'; // Import Axios for API calls
-import HeaderLogin from "../component/HeaderLogin"; // Import the Header component
-import Footer from "../component/Footer"; // Import the Footer component
+import { useNavigate } from "react-router-dom";
+import '../styles/login.css'; // Updated CSS file
+import axios from 'axios';
+import HeaderLogin from "../component/HeaderLogin";
+import Footer from "../component/Footer";
 
 export const LoginPageConsumer = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
-  const [errorMessage, setErrorMessage] = useState(""); // State for error message
-  const [loading, setLoading] = useState(false); // State for loading status
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setErrorMessage(""); // Reset error message
-    setLoading(true); // Set loading to true
+    e.preventDefault();
+    setErrorMessage("");
+    setLoading(true);
 
-    // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setErrorMessage("Invalid email format.");
-      setLoading(false); // Reset loading state
+      setLoading(false);
       return;
     }
 
     try {
-      // Make API call to login
       const response = await axios.post('http://localhost:5000/api/Auth/login', {
-        email,  // Only email and password are required for login
+        email,
         password,
       });
 
-      // Handle successful login
-      console.log(response.data);
-      // Redirect to HomePage on successful login
       if (response.data.success) {
-        navigate('/Homepage'); // Adjust this path if needed
+        navigate('/homepage'); // Navigate to Homepage after successful login
       } else {
         setErrorMessage("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      // Handle error response
       if (error.response) {
-        // Check for specific error messages from the backend
         if (error.response.data.message === "Email not verified or not registered.") {
           setErrorMessage("Please verify your email before logging in.");
         } else {
@@ -54,62 +46,76 @@ export const LoginPageConsumer = () => {
         setErrorMessage("Network error. Please try again.");
       }
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-page-consumer">
-      {/* Header Section */}
+    <section className="vh-100 login-page-consumer">
       <HeaderLogin />
-      <br />
-      <br />
-      {/* Main Content */}
-      <div className="login-page-content">
-        {/* Left Section */}
-        <div className="login-left-section">
-          <img src={loginImage} alt="Login Illustration" className="login-image" />
-        </div>
+      <div className="container py-5 h-100">
+        <div className="row d-flex align-items-center justify-content-center h-100">
+          <div className="col-md-6 d-none d-md-block">
+            {/* Image parallel to the form */}
+            <img 
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" 
+              className="img-fluid login-image" 
+              alt="Phone image" 
+            />
+          </div>
+          <div className="col-md-6">
+            <div className="login-form-shadow">
+              <form onSubmit={handleLogin}>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        {/* Right Section */}
-        <div className="login-right-section">
-          <div className="login-form-container">
-            <h2 className="login-title">Ready to Continue? Sign In Here!</h2>
-            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
-            <form onSubmit={handleLogin}> {/* Form submission handling */}
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  className="input"
-                  placeholder="Enter your email"
-                  type="email"
-                  value={email} // Controlled input
-                  onChange={(e) => setEmail(e.target.value)} // Update email state
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  className="input"
-                  placeholder="Enter your password"
-                  type="password"
-                  value={password} // Controlled input
-                  onChange={(e) => setPassword(e.target.value)} // Update password state
-                  required
-                />
-              </div>
-              <button type="submit" className="login-button" disabled={loading}>
-                {loading ? 'Logging in...' : 'Login'}
-              </button>
-            </form>
+                {/* Email input */}
+                <div className="form-outline mb-4">
+                  <label className="form-label">Email address</label>
+                  <input
+                    type="email"
+                    className="form-control form-control-lg"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {/* Password input */}
+                <div className="form-outline mb-4">
+                  <label className="form-label">Password</label>
+                  <input
+                    type="password"
+                    className="form-control form-control-lg"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="form1Example3"
+                    />
+                    <label className="form-check-label" htmlFor="form1Example3"> Remember me </label>
+                  </div>
+                  <a href="/consumersignup">Create Account?</a> {/* Navigate to Consumer Signup */}
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-lg btn-block login-btn" disabled={loading}>
+                  {loading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Footer Section */}
-      <Footer /> {/* Include the Footer component */}
-    </div>
+      <Footer />
+    </section>
   );
 };
 

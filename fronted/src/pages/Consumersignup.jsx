@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../styles/consumersignup.css'; 
-import csignupImage from '../assests/images/csignup.jpeg'; // Ensure the correct path here
-import axios from 'axios'; 
+import "../styles/consumersignup.css"; 
+import csignupImage from "../assests/images/signup2.jpg"; // Ensure the correct path here
+import axios from "axios"; 
 import Header from "../component/Header"; // Import the Header component
 import Footer from "../component/Footer"; // Import the Footer component
 
@@ -32,65 +32,83 @@ export const ConsumerSignup = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/Auth/createuser', formData);
       if (response.data.success) {
-        setSuccess("Consumer created successfully!"); // Removed the verification message
-        setError(''); 
+        setSuccess("Consumer created successfully!");
+        setError('');
         navigate('/login'); // Redirect to login page after successful signup
       }
     } catch (err) {
       setError(err.response ? err.response.data.message : "An error occurred. Please try again.");
-      setSuccess(''); 
+      setSuccess('');
     }
   };
 
   return (
-    <div className="register-page-consumer">
+    <div className="vh-100 d-flex flex-column">
       <Header />
-      <br />
-      <br />
-      <div className="register-page-content">
-        {/* Left Section */}
-        <div className="register-left-section">
-          <img src={csignupImage} alt="Register Illustration" className="register-image" />
-        </div>
+      <section className="container py-5 h-100 flex-grow-1">
+        <div className="row d-flex align-items-center justify-content-center h-100">
+          <div className="col-md-8 col-lg-7 col-xl-6">
+            <img src={csignupImage} className="img-fluid" alt="Sign Up Illustration" />
+          </div>
+          <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div className="form-container shadow p-4">
+              <form onSubmit={handleSubmit}>
+                {error && <p className="error-message">{error}</p>}
+                {success && <p className="success-message">{success}</p>}
 
-        {/* Right Section */}
-        <div className="register-right-section">
-          <div className="register-form-container">
-            <h2 className="register-title">Ready to Continue? Sign Up Here!</h2>
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
-            <form onSubmit={handleSubmit}>
-              {[ 
-                { label: "Name", type: "text", value: name, setter: setName },
-                { label: "Email", type: "email", value: email, setter: setEmail },
-                { label: "Phone number", type: "tel", value: phonenumber, setter: setPhoneNumber },
-                { label: "Address", type: "text", value: address, setter: setAddress },
-                { label: "Password", type: "password", value: password, setter: setPassword },
-                { label: "Confirm Password", type: "password", value: confirmpassword, setter: setConfirmPassword },
-              ].map(({ label, type, value, setter }) => (
-                <div className="form-group" key={label}>
-                  <label>{label}</label>
-                  <input 
-                    className="input" 
-                    placeholder={`Enter your ${label.toLowerCase()}`} 
-                    type={type} 
-                    value={value} 
-                    onChange={(e) => setter(e.target.value)} 
-                    required 
-                  />
+                <div className="form-outline mb-4">
+                  <input type="text" id="name" className="form-control form-control-lg" 
+                         value={name} onChange={(e) => setName(e.target.value)} 
+                         placeholder="Enter your name" required />
+                  <label className="form-label" htmlFor="name">Name</label>
                 </div>
-              ))}
-              <button type="submit" className="register-button">Signup</button>
-            </form>
-            <p className="account-exists-text">
-              Already have an account? <a href="/login" className="register-link">Log In</a>
-            </p>
+
+                <div className="form-outline mb-4">
+                  <input type="email" id="email" className="form-control form-control-lg" 
+                         value={email} onChange={(e) => setEmail(e.target.value)} 
+                         placeholder="Enter your email" required />
+                  <label className="form-label" htmlFor="email">Email address</label>
+                </div>
+
+                <div className="form-outline mb-4">
+                  <input type="tel" id="phonenumber" className="form-control form-control-lg" 
+                         value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} 
+                         placeholder="Enter your phone number" required />
+                  <label className="form-label" htmlFor="phonenumber">Phone number</label>
+                </div>
+
+                <div className="form-outline mb-4">
+                  <input type="text" id="address" className="form-control form-control-lg" 
+                         value={address} onChange={(e) => setAddress(e.target.value)} 
+                         placeholder="Enter your address" required />
+                  <label className="form-label" htmlFor="address">Address</label>
+                </div>
+
+                <div className="form-outline mb-4">
+                  <input type="password" id="password" className="form-control form-control-lg" 
+                         value={password} onChange={(e) => setPassword(e.target.value)} 
+                         placeholder="Enter your password" required />
+                  <label className="form-label" htmlFor="password">Password</label>
+                </div>
+
+                <div className="form-outline mb-4">
+                  <input type="password" id="confirmpassword" className="form-control form-control-lg" 
+                         value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} 
+                         placeholder="Confirm your password" required />
+                  <label className="form-label" htmlFor="confirmpassword">Confirm Password</label>
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-lg btn-block">Sign Up</button>
+
+                <p className="text-center mt-3">Already have an account? <a href="/login" className="register-link">Log In</a></p>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
       <Footer />
     </div>
   );
 };
 
-export default ConsumerSignup; // Ensure you export it as default
+export default ConsumerSignup;

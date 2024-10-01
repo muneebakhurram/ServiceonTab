@@ -1,205 +1,65 @@
-/* Overall page container */
+/* Ensure white background */
 .login-page-consumer {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: white;
+  min-height: 100vh;
 }
 
-/* Header */
-.login-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f8f9fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+/* Shadow box around the login form */
+.login-form-shadow {
+  background-color: white;
+  border-radius: 10px;
+  padding: 60px; /* Increased padding for more height */
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  min-height: 400px; /* Optional: Set a minimum height */
 }
 
-.logo {
-  display: flex;
-  flex-direction: column; /* Stack logo text */
-  align-items: flex-start; /* Align left */
-}
-
-.logo h1 {
-  margin: 0;
-  font-size: 24px; /* Adjust as needed */
-}
-
-.logo p {
-  margin: 0;
-  font-size: 16px;
-  color: #333;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links a {
-  margin: 0 15px;
-  font-size: 16px;
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:first-child {
-  color: #007bff;
-}
-
-.nav-links a:hover {
-  color: #007bff;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-}
-
-.search-bar-container {
-  position: relative; /* Allows absolute positioning of the button */
-}
-
-.search-bar {
-  padding: 8px 40px 8px 15px; /* Space for the icon */
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  width: 200px;
-  transition: all 0.3s ease;
-}
-
-.search-bar:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.search-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 10px; /* Adjust as needed */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.search-button img {
-  width: 20px; /* Increase size */
-  height: 20px; /* Increase size */
-}
-
-/* Content Split */
-.login-page-content {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100vh; /* Full height of the viewport */
-}
-
-/* Left Section (Solid Background) */
-.login-left-section {
-  flex: 0 0 40% !important; /* Reduced width */
-  background-color: #fff !important; /* Background color */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  border-radius: 15px 0 0 15px; /* Rounded corners for left side */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow */
-  height: 100% !important;
-}
-
-/* Right Section (Solid Blue Background) */
-.login-right-section {
-  flex: 0 0 40% !important; /* Reduced width */
-  background-color: #007bff !important; /* Background color */
-  padding: 50px 40px;
-  border-radius: 0 15px 15px 0; /* Rounded corners for right side */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100% !important;
-}
-
-.login-form-container {
+/* Full width of login button with increased size */
+.login-btn {
   width: 100%;
-  max-width: 400px;
-  text-align: center;
+  padding: 15px;
+  font-size: 20px;
 }
 
-/* Language Selection */
-.language-select {
-  text-align: right;
-  margin-bottom: 10px;
+/* Adjust spacing between the fields and their labels */
+.form-outline {
+  margin-bottom: 25px;
+}
+
+.form-outline label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form-outline input {
   font-size: 14px;
-  color: #666;
+  padding: 10px;
 }
 
-/* Title Styling */
-.login-title {
-  font-size: 26px;
+/* Image styling */
+.login-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make form responsive for smaller screens */
+@media (max-width: 768px) {
+  .login-page-consumer .container {
+    padding: 20px;
+  }
+
+  /* Center the image and form on smaller screens */
+  .login-form-shadow {
+    margin-top: 20px;
+  }
+
+  .login-image {
+    display: none; /* Hide the image on smaller screens */
+  }
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
   font-weight: bold;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-/* Form Group */
-.form-group {
-  margin-bottom: 20px;
-}
-
-/* Input Fields */
-.input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Login Button */
-.login-button {
-  width: 100%;
-  padding: 14px;
-  background-color: #0056b3 !important;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .login-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-container {
-    margin-left: 0;
-  }
-
-  .login-left-section,
-  .login-right-section {
-    width: 60%; /* Increase width for smaller screens */
-    border-radius: 15px; /* Full rounded corners */
-    margin-bottom: 20px; /* Add space between sections */
-  }
+  margin-bottom: 15px;
 }
