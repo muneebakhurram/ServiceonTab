@@ -1,0 +1,152 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Full page container */
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Wrapper around main content for better centering */
+.main-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Ensures the container takes available vertical space */
+    padding: 20px;
+}
+
+/* Landing page styling */
+.landingpage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Set max width for centering */
+    width: 100%;
+}
+
+.text-sections {
+    max-width: 50%;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+}
+
+.main-headings {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.sub-headings {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Sign-up button styling */
+
+    .signup-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 15px; /* Smaller padding for compact look */
+        width: 150px; /* Set fixed width */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        align-self: flex-start; /* Aligns button to the left */
+        margin-left: 0; /* Ensures no extra left margin */
+    }
+
+.signup-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Login text styling */
+.log-in-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.log-in-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.log-in-text a:hover {
+    text-decoration: underline;
+}
+
+/* Image styling */
+.pic {
+    width: 45%; 
+    height: auto;
+    z-index: 1;
+    position: relative;
+    margin-left: 20px;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 1024px) {
+    .landingpage {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 10px;
+        height: auto;
+    }
+
+    .text-sections {
+        width: 100%;
+        text-align: center;
+        margin-top: 0; 
+    }
+
+    .main-headings {
+        font-size: 2rem;
+    }
+
+    .signup-btn {
+        font-size: 1rem;
+        padding: 12px 120px;
+    }
+
+    .sub-headings, .highlight {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .landingpage {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-sections, .pic {
+        width: 100%;
+        text-align: center;
+    }
+
+    .signup-btn {
+        width: 100%;
+        padding: 12px 0;
+    }
+}

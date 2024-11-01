@@ -1,0 +1,158 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Allow items to wrap on small screens */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex: 1; /* Allow logo to take available space */
+}
+
+.logo img {
+  height: 70px; 
+  margin-right: 15px; 
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.logo-text .highlight {
+  color: #007bff; 
+}
+
+.logo-text h1 {
+  margin: 0; 
+  font-size: 20px; 
+  font-weight: bold;
+}
+
+.logo-text p {
+  margin: 0; 
+  font-size: 14px; 
+  color: #666;
+}
+
+.navigation {
+  display: flex;
+  align-items: center; 
+  gap: 20px; 
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.search-login {
+  display: flex;
+  align-items: center; 
+  gap: 10px;
+}
+
+.search-box {
+  position: relative;
+  margin-right: 10px;
+  width: 100%; /* Allow search box to fill the remaining space */
+  max-width: 200px; /* Set a maximum width */
+}
+
+.search-box input {
+  border: 1px solid #ccc; 
+  border-radius: 25px; 
+  width: 100%; 
+  font-size: 14px; 
+  padding: 10px 15px; /* Add padding for better input appearance */
+}
+
+.search-icon {
+  position: absolute; 
+  top: 50%; 
+  right: 10px; /* Move the icon to the right side of the input */
+  transform: translateY(-50%); 
+  width: 16px; 
+  height: 16px; 
+  cursor: pointer; 
+}
+
+button {
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  border-radius: 25px; 
+  cursor: pointer; 
+  font-size: 14px; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  padding: 10px 20px; 
+  display: flex; 
+  align-items: center; 
+}
+
+button:hover {
+  background-color: #0056b3; 
+}
+
+.search-box input:hover, 
+.search-box input:focus {
+  border-color: #000; 
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .header {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      align-items: flex-start; /* Align items to the left */
+  }
+
+  .logo {
+      margin-bottom: 10px; /* Space between logo and navigation */
+  }
+
+  .navigation {
+      flex-direction: column; /* Stack navigation links vertically */
+      align-items: flex-start; /* Align links to the left */
+      width: 100%; /* Full width for navigation */
+      margin-bottom: 10px; /* Space between navigation and search/login */
+  }
+
+  .search-login {
+      width: 100%; /* Full width for search and login section */
+      justify-content: space-between; /* Space between search box and buttons */
+  }
+
+  .search-box {
+      width: 70%; /* Reduce width of search box */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+      height: 50px; /* Reduce logo size on very small screens */
+  }
+
+  .logo-text h1 {
+      font-size: 18px; /* Adjust title font size */
+  }
+
+  .logo-text p {
+      font-size: 12px; /* Adjust subtitle font size */
+  }
+
+  .navigation a {
+      font-size: 12px; /* Smaller navigation font size */
+  }
+
+  button {
+      font-size: 12px; /* Smaller button font size */
+      padding: 8px 16px; /* Adjust padding for smaller buttons */
+  }
+}

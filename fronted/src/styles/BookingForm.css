@@ -1,0 +1,133 @@
+/* Base Styles */
+.booking-form-container {
+    background-color: white;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content on smaller screens */
+}
+
+.booking-card {
+    background-color: #EBEBEB;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures full width on mobile */
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Prevents overflow */
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.back-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: lightgrey;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .booking-card {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    textarea,
+    select {
+        padding: 10px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .back-button,
+    .submit-button {
+        width: 100%;
+        margin: 5px 0;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-card {
+        padding: 10px;
+        margin: 5px;
+        box-shadow: none; /* Reduce shadow for mobile view */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    textarea,
+    select {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .back-button,
+    .submit-button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
