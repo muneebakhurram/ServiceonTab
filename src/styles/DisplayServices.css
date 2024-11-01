@@ -1,87 +1,108 @@
 .DisplayServices .homeContainer {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .homeContent {
-    width: 100%;
-    max-width: 1200px;
-    text-align: center;
-  }
-  
-  .services-card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .service-card {
-    position: relative;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: left;
-  }
-  
-  .service-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .service-info {
-    padding: 10px 0;
-  }
-  
-  .service-info h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .service-info p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #555;
-  }
-  
-  .status {
-    color: green;
-    font-weight: bold;
-  }
-  
-  .provider {
-    font-size: 0.9em;
-    color: #777;
-  }
-  
-  .book-now {
-    width: 100%;
-    padding: 10px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .favorite-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    color: #aaa;
-    cursor: pointer;
-  }
-  
-  .favorite-btn:hover {
-    color: #ff5555;
-  }
-  
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9; /* Light background color for contrast */
+}
+
+.homeContent {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.services-title {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.services-card-container {
+  display: flex; /* Change to flex for horizontal layout */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 20px; /* Space between cards */
+  padding: 10px; /* Padding around the container */
+}
+
+.service-card {
+  flex: 0 0 auto; /* Prevent cards from shrinking */
+  width: 250px; /* Fixed width for each card */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+.service-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.service-info {
+  padding: 10px 0;
+}
+
+.service-info h3 {
+  margin: 0;
+  font-size: 1.4em; /* Increased font size for service name */
+  color: #333;
+}
+
+.service-info p {
+  margin: 5px 0;
+  font-size: 1.1em; /* Increased font size for estimated charges */
+  color: #555;
+}
+
+.status {
+  color: green;
+  font-weight: bold;
+}
+
+.provider {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.book-now {
+  width: 100%;
+  padding: 12px; /* Slightly larger padding */
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1em; /* Font size for better visibility */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.book-now:hover {
+  background-color: #0088cc; /* Darker shade on hover */
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Transition for hover effect */
+}
+
+.favorite-btn:hover {
+  color: #ff5555; /* Change color on hover */
+}

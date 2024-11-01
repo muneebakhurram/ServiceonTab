@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../component/Footer';
 import Headeruser from '../component/Headeruser';
+import '../styles/DisplayServices.css'; // Ensure to import the CSS file for styling
 
 function DisplayServices() {
-  // Placeholder state to store services
   const [services, setServices] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/Addservice/all'); // Ensure this URL is correct
+        const data = await response.json();
+        if (data.success) {
+          setServices(data.services);
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching services:', error);
+        setError('Failed to fetch services.');
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   return (
     <div className="DisplayServices">
-      <Headeruser /> {/* Render the Headeruser component here */}
+      <Headeruser />
       <div className="homeContainer">
         <div className="homeContent">
-          <h2>Available Services</h2>
+          <h2 className="services-title">Available Services</h2>
           <div className="services-card-container">
+            {error && <p className="error">{error}</p>}
             {services.length > 0 ? (
               services.map((service, index) => (
                 <div key={index} className="service-card">
-                  <img src={service.image || 'placeholder-image.jpg'} alt={service.name} className="service-image" />
+                  <img src={service.picture || 'placeholder-image.jpg'} alt={service.name} className="service-image" />
                   <div className="service-info">
                     <h3>{service.name}</h3>
-                    <p>Rs. {service.price}</p>
+                    <p>Rs. {service.estimatedCharges}</p>
                     <span className="status">Estimated</span>
                     <p className="provider">BY: {service.provider}</p>
                   </div>
@@ -33,7 +54,7 @@ function DisplayServices() {
           </div>
         </div>
       </div>
-      <Footer /> {/* Render the Footer component here */}
+      <Footer />
     </div>
   );
 }
