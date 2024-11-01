@@ -5,7 +5,7 @@ const addServiceSchema = new mongoose.Schema({
     name: String, 
     estimatedCharges: Number, 
     type: String, 
-    picture: String,
+   picture: String,
 });
 
 
