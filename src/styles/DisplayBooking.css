@@ -1,0 +1,127 @@
+/* Main container for booking list */
+.booking-list {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Each booking item styling */
+.booking-item {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    text-align: left;
+}
+
+.booking-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Header for each booking item */
+.booking-item h3 {
+    color: #343a40;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* Container for booking details */
+.details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between each row */
+}
+
+/* Row styling for each detail */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Styling for detail labels */
+.detail-label {
+    font-weight: bold;
+    color: #555;
+    flex-basis: 40%; /* Fixed width for label */
+    text-align: left;
+}
+
+/* Styling for detail values */
+.detail-value {
+    color: #333;
+    flex-basis: 60%; /* Remaining space for value */
+    text-align: right;
+}
+
+/* Image container */
+.image-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Booking image styling */
+.booking-image {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Download button styling */
+.download-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    margin-left: 10px;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}
+
+/* Heading for the Booking Details page */
+h2 {
+    text-align: center;
+    color: #495057;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+/* Error or no-data message styling */
+p.error-message {
+    color: #dc3545;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 30px;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    .booking-list {
+        padding: 15px;
+    }
+
+    .booking-item {
+        padding: 15px;
+    }
+
+    .booking-image {
+        max-width: 100%;
+    }
+}
