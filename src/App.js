@@ -11,6 +11,7 @@ import DisplayServices from './pages/DisplayServices'; //
 import ServiceProviderDashboard from './pages/ServiceProviderDashboard'; //
 import BookingForm from './pages/BookingForm';
 import DisplayBooking from './pages/DisplayBooking';
+import AddService from './pages/Addservice';
 function App() {
   return (
     <Router>
@@ -26,6 +27,8 @@ function App() {
           <Route exact path="/serviceproviderdashboard" element={<ServiceProviderDashboard />} />
           <Route exact path="/bookingform" element={<BookingForm />} />
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
+          <Route exact path="/Addservice" element={<AddService />} />
+          <Route exact path="/DisplayServices" element={<DisplayServices />} />
         </Routes>
       </div>
     </Router>
