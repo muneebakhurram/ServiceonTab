@@ -9,71 +9,67 @@ const AddService = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-
   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setService((prevService) => ({ ...prevService, [name]: value }));
+    const { name, value } = e.target;
+    setService((prevService) => ({ ...prevService, [name]: value }));
   };
 
- 
   const handleFileChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-          if (file.size > 10 * 1024 * 1024) { 
-              setError("File size should be 10 MB or less.");
-              setService((prevService) => ({ ...prevService, picture: null }));
-              return;
-          }
-          if (!['image/png', 'image/jpeg'].includes(file.type)) {
-              setError("Only PNG and JPEG formats are allowed.");
-              setService((prevService) => ({ ...prevService, picture: null }));
-              return;
-          }
-          setError('');
-          setService((prevService) => ({ ...prevService, picture: file }));
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) { // Limit file size to 10 MB
+        setError("File size should be 10 MB or less.");
+        return;
       }
+      if (!['image/png', 'image/jpeg'].includes(file.type)) {
+        setError("Only PNG and JPEG formats are allowed.");
+        return;
+      }
+      setError('');
+      setService((prevService) => ({ ...prevService, picture: file }));
+    }
   };
 
   const validateForm = () => {
-      if (!service.name) return "Service Name is required.";
-      if (!service.estimatedCharges) return "Estimated Charges are required.";
-      if (!service.type) return "Service Type is required.";
-      return null;
+    if (!service.name) return "Service Name is required.";
+    if (!service.estimatedCharges) return "Estimated Charges are required.";
+    if (!service.type) return "Service Type is required.";
+    return null;
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      const validationError = validateForm();
-      if (validationError) {
-          setError(validationError);
-          setSuccess('');
-          return;
-      }
+    e.preventDefault();
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      setSuccess('');
+      return;
+    }
 
-      const formData = new FormData();
-      Object.entries(service).forEach(([key, value]) => {
-          formData.append(key, value);
+    const formData = new FormData();
+    Object.entries(service).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    try {
+      const response = await fetch('http://localhost:5000/api/Addservice/add', {
+        method: 'POST',
+        body: formData,
       });
 
-      try {
-          const response = await fetch('http://localhost:5000/api/Addservice/add', { 
-              method: 'POST',
-              body: formData,
-          });
-
-          const result = await response.json();
-          if (result.success) {
-              setSuccess("Service added successfully!");
-              setError('');
-              setService(initialState); 
-          } else {
-              setError(result.message);
-              setSuccess('');
-          }
-      } catch (error) {
-        console.error("Error submitting form:", error);
-        setError("Failed to create account.");
+      const result = await response.json();
+      if (result.success) {
+        setSuccess("Service added successfully!");
+        setError('');
+        setService(initialState); // Reset form after success
+      } else {
+        setError(result.message);
+        setSuccess('');
       }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setError("Failed to create account.");
+    }
   };
 
   return (
