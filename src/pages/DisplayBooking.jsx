@@ -47,60 +47,60 @@ const DisplayBooking = () => {
     };
 
     if (error) {
-        return <p>{error}</p>;
+        return <p className="error-message">{error}</p>;
     }
 
     if (bookingDetails.length === 0) {
-        return <p>No booking details found.</p>;
+        return <p className="no-bookings">No booking details found.</p>;
     }
 
     return (
         <div>
             <Headeruser />
-            <br />
-            <br />
-            <h2>Booking Details</h2>
-            <div className="booking-list">
-                {bookingDetails.map((booking) => (
-                    <div key={booking._id} className="booking-item">
-                        <h3>{booking.serviceName}</h3>
-                        <p>Problem Description: {booking.problemDescription}</p>
-                        <p>Estimated Charges: {booking.estimatedCharges}</p>
-                        <p>Date: {new Date(booking.date).toLocaleDateString()}</p>
-                        <p>Time: {booking.time}</p>
-                        <p>Service Level: {booking.serviceLevel}</p>
-                        <div className="image-container">
-                            {booking.image && (
-                                <div className="button-image-wrapper">
-                                    <img
-                                        src={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
-                                        alt="Booking"
-                                        className="booking-image"
-                                    />
-                                    <div className="button-container">
-                                        <a
-                                            href={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
-                                            download
-                                            className="download-button"
-                                        >
-                                            Download Image
-                                        </a>
-
-                                        {/* Check if the booking was opened by the consumer */}
-                                        {booking.openedBy === 'consumer' && (
-                                            <button
-                                                onClick={() => handleCancelBooking(booking._id)}
-                                                className="download-button"
-                                            >
-                                                Cancel Booking
-                                            </button>
-                                        )}
-                                    </div>
+            <div className="home-container">
+                <div className="home-content">
+                    <h2>Booking Details</h2>
+                    <div className="booking-list">
+                        {bookingDetails.map((booking) => (
+                            <div key={booking._id} className="booking-item">
+                                <div className="booking-text">
+                                    <h3>{booking.serviceName}</h3>
+                                    <p>Problem Description: {booking.problemDescription}</p>
+                                    <p>Estimated Charges: Rs. {booking.estimatedCharges}</p>
+                                    <p>Date: {new Date(booking.date).toLocaleDateString()}</p>
+                                    <p>Time: {booking.time}</p>
+                                    <p>Service Level: {booking.serviceLevel}</p>
                                 </div>
-                            )}
-                        </div>
+                                <div className="image-container">
+                                    {booking.image && (
+                                        <img
+                                            src={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
+                                            alt="Booking"
+                                            className="booking-image"
+                                        />
+                                    )}
+                                </div>
+                                <div className="button-container">
+                                    <a
+                                        href={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
+                                        download
+                                        className="download-button"
+                                    >
+                                        Download Image
+                                    </a>
+                                    <a
+                                        href={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
+                                        download
+                                        className="download-button"
+                                    >
+                                        Cancel Booking
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
             <Footer />
         </div>

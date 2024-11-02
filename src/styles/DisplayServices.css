@@ -1,108 +1,146 @@
-.DisplayServices .homeContainer {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  background-color: #f9f9f9; /* Light background color for contrast */
-}
-
-.homeContent {
-  width: 100%;
-  max-width: 1200px;
-  text-align: center;
-}
-
-.services-title {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
+/* Container for each service card */
 .services-card-container {
-  display: flex; /* Change to flex for horizontal layout */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  gap: 20px; /* Space between cards */
-  padding: 10px; /* Padding around the container */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
+/* Styling for individual service cards */
 .service-card {
-  flex: 0 0 auto; /* Prevent cards from shrinking */
-  width: 250px; /* Fixed width for each card */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+  min-width: 350px; /* Minimum width for the card */
+  min-height: 350px;
+  max-width: 350px; /* Maximum width for the card */
+  padding: 15px; /* Padding within the card */
+  border: 1px solid #ddd; /* Border for the card */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: center; /* Center text */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center; /* Center items */
+  transition: transform 0.2s; /* Transition for hover effect */
+  overflow: hidden; /* Prevent overflow */
 }
 
 .service-card:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Hover effect */
 }
 
+/* Service image styling */
 .service-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover; /* Maintain aspect ratio and cover the area */
+  width: 100%; /* Full width of the card */
+  height: auto; /* Auto height */
+  max-height: 150px; /* Limit max height */
+  border-radius: 8px; /* Rounded corners for image */
+  object-fit: cover; /* Cover the container */
+  margin-top: 10px; /* Space above the image */
 }
 
+/* Service information styling */
 .service-info {
-  padding: 10px 0;
+  text-align: center; /* Center text */
+  margin-bottom: 10px; /* Space below info */
 }
 
-.service-info h3 {
-  margin: 0;
-  font-size: 1.4em; /* Increased font size for service name */
-  color: #333;
+.service-name {
+  color: #343a40; /* Dark color for name */
+  font-size: 1.3em; /* Font size for name */
+  font-weight: bold; /* Bold text */
+  margin: 5px 0; /* Margin for spacing */
 }
 
-.service-info p {
-  margin: 5px 0;
-  font-size: 1.1em; /* Increased font size for estimated charges */
-  color: #555;
+.service-price {
+  color: #28a745; /* Green color for price */
+  font-size: 1.1em; /* Font size for price */
+  font-weight: bold; /* Bold text */
+  margin: 5px 0; /* Space around price */
 }
 
-.status {
-  color: green;
-  font-weight: bold;
+.service-type {
+  font-size: 0.9em; /* Font size for type */
+  color: #6c757d; /* Grey color for type */
+  margin: 5px 0; /* Margin for spacing */
 }
 
-.provider {
-  font-size: 0.9em;
-  color: #777;
+/* Button container inside the service card */
+.button-container {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  margin-top: 10px; /* Margin above the button container */
+}
+
+/* Button styles */
+.book-now,
+.favorite-btn {
+  padding: 8px 15px; /* Padding for buttons */
+  font-size: 1em; /* Font size for buttons */
+  border-radius: 5px; /* Rounded corners for buttons */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.2s; /* Transition for background color */
 }
 
 .book-now {
-  width: 100%;
-  padding: 12px; /* Slightly larger padding */
-  background-color: #00aaff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 1em; /* Font size for better visibility */
-  transition: background-color 0.3s ease; /* Transition for hover effect */
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
 }
 
 .book-now:hover {
-  background-color: #0088cc; /* Darker shade on hover */
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 .favorite-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5em;
-  color: #aaa;
-  cursor: pointer;
-  transition: color 0.3s ease; /* Transition for hover effect */
+  background-color: #dc3545; /* Red background */
+  color: #fff; /* White text */
 }
 
 .favorite-btn:hover {
-  color: #ff5555; /* Change color on hover */
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Error or no-data message styling */
+.error-message, .no-services {
+  color: #dc3545; /* Red color for error message */
+  text-align: center; /* Center text */
+  font-size: 1.2em; /* Font size */
+  margin-top: 20px; /* Margin above message */
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+  .service-card {
+    width: 100%; /* Full width on mobile */
+    padding: 10px; /* Adjusted padding */
+    min-height: auto; /* Remove fixed height for small screens */
+  }
+  
+  .service-image {
+    max-height: 120px; /* Adjust image height for smaller screens */
+  }
+
+  .button-container {
+    flex-direction: column; /* Stack buttons vertically on mobile */
+  }
+
+  .book-now, .favorite-btn {
+    width: 100%; /* Full width buttons */
+    padding: 10px; /* Adjusted padding */
+    font-size: 0.9em; /* Adjusted font size */
+  }
+}
+/* Placeholder styling for no image */
+.no-image-placeholder {
+  width: 100%; /* Full width */
+  height: 150px; /* Consistent height with images */
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px dashed #ddd; /* Dashed border */
+  display: flex; /* Flex for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  color: #6c757d; /* Grey color for text */
+  font-size: 1em; /* Font size */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 20px; /* Space below the placeholder */
 }
