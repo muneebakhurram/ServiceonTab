@@ -1,32 +1,77 @@
-.vh-100 {
-  height: 100vh;
+/* Main container to align image and text side by side */
+.service-container {
+  display: flex; /* Aligns text and image horizontally */
+  align-items: center; /* Vertically centers the text and image */
+  justify-content: space-between; /* Distributes space between text and image */
+  padding: 20px;
 }
 
-.error-message {
-  color: red;
-  font-size: 1.2rem;
+.text-section {
+  flex: 1; /* Takes up equal space as the image */
+  padding-right: 20px; /* Adds space between text and image */
 }
 
-.success-message {
-  color: green;
-  font-size: 1.2rem;
+.image-section {
+  flex: 1; 
+  margin-top: -470px;/* Takes up equal space as the text */
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  max-width: 100%; /* Makes the image responsive */
+  height: auto; /* Keeps the aspect ratio intact */
 }
 
-.form-container {
-  background-color: white;
-  border-radius: 10px;
-  margin: auto;
+/* Styling for the text content */
+.main-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
 }
 
-.form-outline {
-  margin-bottom: 1.5rem;
+.sub-heading {
+  font-size: 1.5rem;
+  color: #777;
 }
 
+.highlight-text {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Cards container styling */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: 23px;
+}
+
+.card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.card button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Button styles */
 .btn-primary {
   background-color: #007bff;
   border: none;
@@ -34,38 +79,38 @@
   width: 100%; /* Match the button width to the input fields */
 }
 
-.text-center {
-  text-align: center;
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
 }
 
-.mt-3 {
-  margin-top: 1rem;
-}
-
-.register-link {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.shadow {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.form-outline.mb-4 {
-  margin-bottom: 0rem !important; /* Reduced from 1.5rem to 1rem to move fields closer */
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments for mobile */
 @media (max-width: 768px) {
-  .form-container {
-    padding: 20px;
+  .service-container {
+    flex-direction: column; /* Stack the text and image vertically */
+    text-align: center;
   }
 
-  .form-outline input {
-    font-size: 1rem; /* Adjust font size for smaller screens */
+  .text-section,
+  .image-section {
+    flex: 1 100%; /* Ensures both sections take full width on small screens */
+    padding-right: 0;
   }
 
-  .btn-primary {
-    font-size: 1rem; /* Adjust button font size for smaller screens */
+  .cards-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%; /* Cards take full width on smaller screens */
+    margin-bottom: 15px;
+  }
+
+  .btn-primary,
+  .btn-danger {
+    font-size: 1rem;
   }
 }

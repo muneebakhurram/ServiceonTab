@@ -7,11 +7,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px; /* Add white space before the footer starts */
-    margin-left: -75px !important;
-    margin-right: -75px !important;
+    margin-top: 40px;
 }
 
+/* Footer content container */
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -19,9 +18,9 @@
     max-width: 1200px;
     flex-wrap: wrap;
     gap: 20px;
-    
 }
 
+/* Footer section styles */
 .footer-section {
     flex: 1;
     margin: 0 2px;
@@ -32,17 +31,14 @@
     margin: 0;
 }
 
-.logo-section p {
-    font-size: 14px;
-    color: #999;
-}
-
+.logo-section p,
 .maintenance-text {
-    font-size: 16px;
+    font-size: 14px;
     color: #999;
     margin: 0;
 }
 
+/* Services menu section */
 .services-menu-section {
     display: flex;
     gap: 40px;
@@ -115,9 +111,171 @@
     text-align: center;
     font-size: 12px;
     color: #bbb;
-    margin-top: 20px; /* Add space before the copyright text */
+    margin-top: 20px;
 }
 
 .highlight {
     color: #007bff;
+}
+
+/* Responsive adjustments */
+
+/* For small devices (375px and below) */
+@media (max-width: 375px) {
+    .footer-content {
+        flex-direction: column; /* Stack footer sections vertically */
+        align-items: center;
+        padding: 20px;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin-bottom: 20px; /* Add spacing between stacked sections */
+    }
+
+    .logo-section h1 {
+        font-size: 20px; /* Smaller logo text */
+    }
+
+    .logo-section p,
+    .maintenance-text,
+    .footer-section h3,
+    .footer-section ul li {
+        font-size: 12px; /* Reduce font sizes for better readability */
+    }
+
+    .footer-section button {
+        padding: 8px 12px; /* Adjust button size for small screens */
+        font-size: 12px;
+    }
+
+    .services-menu-section {
+        flex-direction: column; /* Stack services menu vertically */
+        gap: 10px;
+    }
+
+    .footer-bottom {
+        font-size: 10px;
+    }
+}
+
+/* For medium devices (376px to 667px) */
+@media (max-width: 667px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .logo-section h1 {
+        font-size: 22px; /* Adjust logo text size */
+    }
+
+    .logo-section p,
+    .maintenance-text,
+    .footer-section h3,
+    .footer-section ul li {
+        font-size: 14px; /* Slightly larger font for better readability */
+    }
+
+    .footer-section button {
+        padding: 10px 15px; /* Adjust button padding */
+    }
+
+    .services-menu-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-line img {
+        width: 95%; /* Make footer image fit better */
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+    }
+}
+
+/* For larger devices (668px to 1280px) */
+@media (max-width: 1280px) {
+    .footer-content {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .footer-section {
+        width: 25%; /* More space for each footer section */
+        margin-bottom: 0;
+    }
+
+    .logo-section h1 {
+        font-size: 24px; /* Logo size for medium screens */
+    }
+
+    .footer-section h3 {
+        font-size: 16px;
+    }
+
+    .footer-section ul li {
+        font-size: 14px;
+    }
+
+    .footer-section button {
+        padding: 10px 20px;
+    }
+
+    .services-menu-section {
+        gap: 25px;
+    }
+
+    .footer-line img {
+        width: 90%; /* Adjust the image to fit */
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+}
+
+/* For large screens (1281px and above) */
+@media (min-width: 1281px) {
+    .footer-content {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 40px;
+    }
+
+    .footer-section {
+        width: 20%; /* Evenly distribute space for each section */
+    }
+
+    .logo-section h1 {
+        font-size: 28px;
+    }
+
+    .footer-section h3 {
+        font-size: 18px;
+    }
+
+    .footer-section ul li {
+        font-size: 16px;
+    }
+
+    .footer-section button {
+        padding: 12px 25px;
+    }
+
+    .footer-line img {
+        width: 80%;
+    }
+
+    .footer-bottom {
+        font-size: 14px;
+    }
 }
