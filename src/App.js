@@ -1,22 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Login from './pages/Login'; // Adjust the path if necessary
-import Consumersignup from './pages/Consumersignup'; // Adjust the path if necessary
-import './App.css'; // Your CSS file for styling
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Consumersignup from './pages/Consumersignup';
 import HomePage from './pages/HomePage';
 import MainPage from './pages/MainPage';
 import AdminDashboard from './pages/AdminDashboard';
-import Header from './component/Headeradmin'; // Import the Header component
-import DisplayServices from './pages/DisplayServices'; //
-import ServiceProviderDashboard from './pages/ServiceProviderDashboard'; //
+import DisplayServices from './pages/DisplayServices';
+import ServiceProviderDashboard from './pages/ServiceProviderDashboard';
 import BookingForm from './pages/BookingForm';
 import DisplayBooking from './pages/DisplayBooking';
 import AddService from './pages/Addservice';
+
 function App() {
   return (
     <Router>
       <div className="App">
-        <ConditionalHeader />
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/consumersignup" element={<Consumersignup />} />
@@ -28,21 +26,10 @@ function App() {
           <Route exact path="/bookingform" element={<BookingForm />} />
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
           <Route exact path="/Addservice" element={<AddService />} />
-          <Route exact path="/DisplayServices" element={<DisplayServices />} />
         </Routes>
       </div>
     </Router>
   );
-}
-
-// Component to conditionally render Header based on the current route
-function ConditionalHeader() {
-  const location = useLocation();
-  
-  // Only show the Header on the Dashboard page
-  const showHeader = location.pathname === "/dashboard"; 
-
-  return showHeader ? <Header /> : null; // Render Header only if on Dashboard
 }
 
 export default App;

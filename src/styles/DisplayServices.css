@@ -74,12 +74,13 @@
 /* Button styles */
 .book-now,
 .favorite-btn {
-  padding: 8px 15px; /* Padding for buttons */
+  padding: 9px 17px; /* Padding for buttons */
   font-size: 1em; /* Font size for buttons */
   border-radius: 5px; /* Rounded corners for buttons */
   border: none; /* Remove border */
   cursor: pointer; /* Pointer cursor */
   transition: background-color 0.2s; /* Transition for background color */
+  width: 150px; /* Increased width */
 }
 
 .book-now {
@@ -130,6 +131,7 @@
     font-size: 0.9em; /* Adjusted font size */
   }
 }
+
 /* Placeholder styling for no image */
 .no-image-placeholder {
   width: 100%; /* Full width */

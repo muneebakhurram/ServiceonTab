@@ -8,9 +8,9 @@
 .login-form-shadow {
   background-color: white;
   border-radius: 10px;
-  padding: 60px; /* Increased padding for more height */
+  padding: 40px; /* Adjusted padding for better responsiveness */
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
-  min-height: 400px; /* Optional: Set a minimum height */
+  min-height: 400px;
 }
 
 /* Full width of login button with increased size */
@@ -48,12 +48,220 @@
   }
 
   /* Center the image and form on smaller screens */
+  .row {
+    flex-direction: column; /* Stack image and form vertically */
+  }
+
   .login-form-shadow {
     margin-top: 20px;
+    padding: 30px; /* Adjust padding to fit better */
+  }
+
+  .col-md-6.d-none.d-md-block {
+    display: none; /* Hide the image on smaller screens */
   }
 
   .login-image {
-    display: none; /* Hide the image on smaller screens */
+    display: none; /* Hide the image completely */
+  }
+
+  /* Adjust input fields for smaller screens */
+  .form-outline input {
+    font-size: 16px; /* Slightly larger font for easier reading on small screens */
+  }
+
+  .login-btn {
+    font-size: 18px; /* Adjust button font size */
+    padding: 12px;
+  }
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+/* Ensure white background */
+.login-page-consumer {
+  background-color: white;
+  min-height: 100vh;
+}
+
+/* Shadow box around the login form */
+.login-form-shadow {
+  background-color: white;
+  border-radius: 10px;
+  padding: 60px; /* Adjust padding for desktop */
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  min-height: 400px; /* Optional: Set a minimum height */
+}
+
+/* Full width of login button with increased size */
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+}
+
+/* Adjust spacing between the fields and their labels */
+.form-outline {
+  margin-bottom: 25px;
+}
+
+.form-outline label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form-outline input {
+  font-size: 14px;
+  padding: 10px;
+}
+
+/* Image styling */
+.login-image {
+  width: 100%; /* Make sure the image takes up the full width of its container */
+  height: auto; /* Keep the aspect ratio intact */
+  object-fit: cover; /* Ensure image is cropped to fill its container without distortion */
+}
+
+/* Make form and image responsive for smaller screens */
+@media (max-width: 768px) {
+  .login-page-consumer .container {
+    padding: 20px;
+  }
+
+  .row {
+    flex-direction: column; /* Stack the form and image vertically */
+    align-items: center;     /* Center align the content */
+  }
+
+  .col-md-6 {
+    width: 100%; /* Make both sections full width */
+    text-align: center; /* Center the image and form content */
+  }
+
+  /* Adjust the login form shadow padding */
+  .login-form-shadow {
+    padding: 30px; /* Adjust padding to fit better */
+  }
+
+  /* Hide image on small devices */
+  .login-image {
+    display: block; /* Ensure the image is still visible on mobile */
+    max-width: 100%; /* Ensure image doesn't overflow */
+    height: auto;
+  }
+
+  /* Adjust the input fields and button for smaller screens */
+  .form-outline input {
+    font-size: 16px; /* Larger text for better readability */
+  }
+
+  .login-btn {
+    font-size: 18px; /* Adjust button font size */
+    padding: 12px;
+  }
+
+  /* Error message styling */
+  .error-message {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}/* Ensure white background */
+.login-page-consumer {
+  background-color: white;
+  min-height: 100vh;
+}
+
+/* Shadow box around the login form */
+.login-form-shadow {
+  background-color: white;
+  border-radius: 10px;
+  padding: 60px; /* Adjust padding for desktop */
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  min-height: 400px; /* Optional: Set a minimum height */
+}
+
+/* Full width of login button with increased size */
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+}
+
+/* Adjust spacing between the fields and their labels */
+.form-outline {
+  margin-bottom: 25px;
+}
+
+.form-outline label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form-outline input {
+  font-size: 14px;
+  padding: 10px;
+}
+
+/* Image styling */
+.login-image {
+  width: 100%; /* Make sure the image takes up the full width of its container */
+  height: auto; /* Keep the aspect ratio intact */
+  object-fit: cover; /* Ensure image is cropped to fill its container without distortion */
+}
+
+/* Make form and image responsive for smaller screens */
+@media (max-width: 768px) {
+  .login-page-consumer .container {
+    padding: 20px;
+  }
+
+  .row {
+    flex-direction: column; /* Stack the form and image vertically */
+    align-items: center;     /* Center align the content */
+  }
+
+  .col-md-6 {
+    width: 100%; /* Make both sections full width */
+    text-align: center; /* Center the image and form content */
+  }
+
+  /* Adjust the login form shadow padding */
+  .login-form-shadow {
+    padding: 30px; /* Adjust padding to fit better */
+  }
+
+  /* Ensure image is shown and responsive */
+  .login-image {
+    display: block; /* Show image on smaller screens */
+    max-width: 100%; /* Ensure image doesn't overflow */
+    height: auto;
+  }
+
+  /* Adjust the input fields and button for smaller screens */
+  .form-outline input {
+    font-size: 16px; /* Larger text for better readability */
+  }
+
+  .login-btn {
+    font-size: 18px; /* Adjust button font size */
+    padding: 12px;
+  }
+
+  /* Error message styling */
+  .error-message {
+    font-size: 14px;
+    margin-bottom: 15px;
   }
 }
 
