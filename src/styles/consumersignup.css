@@ -9,6 +9,7 @@
   margin: 20px auto; /* Center the form */
 }
 
+
 /* Responsive adjustments for tablets */
 @media (max-width: 768px) {
   .form-container {
