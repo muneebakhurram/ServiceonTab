@@ -110,19 +110,39 @@
 }
 
 /* Responsive styles for mobile devices */
+@media (max-width: 1024px) {
+  .service-card {
+    width: 45%; /* Adjust for medium-sized screens (like tablets) */
+    padding: 15px;
+  }
+
+  .service-image {
+    max-height: 130px; /* Adjust image height */
+  }
+
+  .button-container {
+    flex-direction: row; /* Buttons stay horizontally aligned on medium screens */
+  }
+
+  .book-now, .favorite-btn {
+    width: 48%; /* Adjust button width */
+  }
+}
+
 @media (max-width: 600px) {
   .service-card {
     width: 100%; /* Full width on mobile */
     padding: 10px; /* Adjusted padding */
     min-height: auto; /* Remove fixed height for small screens */
   }
-  
+
   .service-image {
     max-height: 120px; /* Adjust image height for smaller screens */
   }
 
   .button-container {
     flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 15px; /* Increased gap for better spacing */
   }
 
   .book-now, .favorite-btn {
