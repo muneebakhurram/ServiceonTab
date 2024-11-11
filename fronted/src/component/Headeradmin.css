@@ -1,0 +1,146 @@
+/* Container Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  min-height: 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 66px;
+  margin-right: 15px;
+  transition: transform 0.4s ease;
+}
+
+.logo:hover img {
+  transform: scale(1.1);
+}
+
+.navigation {
+  display: flex;
+  gap: 20px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.request-link {
+  transition: color 0.3s ease;
+}
+
+.request-link:hover {
+  color: #007bff;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+/* Dropdown styles */
+.dropdown-content {
+  position: absolute;
+  background-color: white;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.request-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: default; /* Ensure non-clickable area remains non-clickable */
+  z-index: 5;
+}
+
+.request-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.request-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.request-details p {
+  margin: 5px 0;
+}
+
+.request-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.request-actions button {
+  padding: 8px 12px;
+  margin: 5px;
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.approve-btn:hover {
+  background-color: #218838;
+}
+
+.reject-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+}
+
+/* Download link styles */
+.download-link {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007BFF;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.download-link:hover {
+  color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navigation a {
+    margin: 5px 0;
+  }
+}

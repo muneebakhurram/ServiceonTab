@@ -7,6 +7,8 @@ const connectToMongo = require('./db');
 const authRoutes = require('./routes/Auth');
 const bookingRoutes = require('./routes/Booking');
 const providerRoutes = require('./routes/Provider'); 
+const adminRoutes = require('./routes/Admin');
+
 require('dotenv').config();
 
 const app = express();
@@ -20,8 +22,17 @@ if (!fs.existsSync(uploadDir)) {
 
 // Middleware
 app.use(express.json());
-app.use(cors());
-app.use('/uploads', express.static('uploads'));
+app.use(cors({
+    origin: 'http://localhost:3000',  
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
+//app.use(cors());
+
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+//app.use('/uploads', express.static('uploads'));
 
 // Connect to MongoDB
 connectToMongo();
@@ -29,7 +40,10 @@ connectToMongo();
 // API Routes
 app.use('/api/Auth', authRoutes);
 app.use('/api/Booking', bookingRoutes);
-app.use('/api/Provider', providerRoutes);
+app.use('/api/Provider', providerRoutes); 
+app.use('/api/Admin', adminRoutes);
+
+
 
 
 app.listen(PORT, () => {

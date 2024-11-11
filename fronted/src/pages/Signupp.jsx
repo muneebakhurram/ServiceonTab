@@ -6,13 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Signup.css';
 
-
 const Signupp = () => {
   const [form, setForm] = useState({
     name: '',
+    email: '',
     companyCode: '',
     phone: '',
-    email: '',
     password: '',
     address: '',
     cnicFront: null,
@@ -27,49 +26,47 @@ const Signupp = () => {
     setShowPassword(!showPassword);
   };
 
-
   const validateForm = () => {
     const newErrors = {};
     const nameRegex = /^[A-Za-z]{3,15}$/;
     if (!nameRegex.test(form.name)) {
       newErrors.name = "Name must be unique, only letters, and between 3-15 characters.";
     }
-
+  
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
-
     if (!passwordRegex.test(form.password)) {
       newErrors.password = "Password must be 8-15 characters, with 1 uppercase letter and 1 special character.";
     }
-
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       newErrors.email = "Enter a valid email format, e.g., example12@gmail.com.";
     }
-
+  
     const phoneRegex = /^\d{7}$/;
     if (!form.companyCode) {
       newErrors.companyCode = "Select a valid phone code.";
     }
-    if (!phoneRegex.test(form.phone)) {
+    if (!form.phone || !phoneRegex.test(form.phone)) {
       newErrors.phone = "Phone number must be exactly 7 digits.";
     }
-
+  
     const addressRegex = /^[A-Za-z0-9\s,.-]{10,}$/;
     if (!addressRegex.test(form.address)) {
       newErrors.address = "Address must be at least 10 characters with allowed symbols.";
     }
-
+  
     if (!form.cnicFront || !['image/jpeg', 'image/png'].includes(form.cnicFront.type) || form.cnicFront.size > 10 * 1024 * 1024) {
       newErrors.cnicFront = "CNIC front image must be JPG/PNG format and <=10 MB.";
     }
     if (!form.cnicBack || !['image/jpeg', 'image/png'].includes(form.cnicBack.type) || form.cnicBack.size > 10 * 1024 * 1024) {
       newErrors.cnicBack = "CNIC back image must be JPG/PNG format and <=10 MB.";
     }
-
+  
     if (!form.policeCertificate || !['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(form.policeCertificate.type) || form.policeCertificate.size > 10 * 1024 * 1024) {
       newErrors.policeCertificate = "Police certificate must be PDF/DOCX format and <=10 MB.";
     }
-
+  
     return Object.keys(newErrors).length ? newErrors : null;
   };
 
@@ -90,6 +87,7 @@ const Signupp = () => {
       return;
     }
 
+    // Prepare the form data
     const signupData = new FormData();
     Object.keys(form).forEach((key) => {
       signupData.append(key, form[key]);
@@ -103,8 +101,8 @@ const Signupp = () => {
 
       const result = await response.json();
       if (result.success) {
-        setSuccess("Signup successful! Your data has been submitted.");
-        setError({}); 
+        setSuccess("Request is submitted, you will receive an email within 2 days!");
+        setError({});
         setForm({
           name: '',
           companyCode: '',
@@ -117,7 +115,7 @@ const Signupp = () => {
           policeCertificate: null,
         });
       } else if (result.message === "Email is already registered.") {
-        setError({ email: result.message }); 
+        setError({ email: result.message });
       } else {
         setError({ submit: result.message });
       }
@@ -152,7 +150,7 @@ const Signupp = () => {
             <div className="form-group">
               <label>Phone Number</label>
               <div className="phone-input">
-                <select name="companyCode" value={form.companyCode} onChange={handleChange} className="phone-code">
+                <select name="companyCode" value={form.companyCode} onChange={handleChange} className="phone-code" required>
                   <option value="">Select code</option>
                   <option value="0300">+92 300 (Mobilink)</option>
                   <option value="0345">+92 345 (Telenor)</option>
@@ -164,6 +162,7 @@ const Signupp = () => {
                 <input type="text" name="phone" placeholder="Enter phone number" value={form.phone} onChange={handleChange} className="phone-number" required />
               </div>
               {error.phone && <p className="error">{error.phone}</p>}
+              {error.companyCode && <p className="error">{error.companyCode}</p>}
             </div>
             <div className="form-group">
               <label>Password</label>
@@ -204,11 +203,10 @@ const Signupp = () => {
               <input type="file" name="policeCertificate" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={handleChange} required />
               {error.policeCertificate && <p className="error">{error.policeCertificate}</p>}
             </div>
-            <button type="submit">Submit</button>
+            <div className="form-group">
+              <button type="submit">Submit</button>
+            </div>
           </form>
-          <p className="login-prompt">
-            Already have an account? <a href="/login">Login here</a>
-          </p>
         </div>
       </div>
       <Footer />

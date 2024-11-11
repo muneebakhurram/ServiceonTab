@@ -1,19 +1,25 @@
-// Auth.js
 const express = require('express');
-const ConsumerSignup = require('../models/User'); // Adjust the path to your User model
+const cors = require('cors');
+const ConsumerSignup = require('../models/User'); // Adjust the path if needed
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
-require('dotenv').config(); // To load environment variables from .env file
+require('dotenv').config(); // Load environment variables
 
 const router = express.Router();
+router.use(cors()); // Apply CORS to all routes in this router
+
+// Regular expressions for validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const nameRegex = /^[A-Za-z]{3,15}$/;
+const passwordRegex = /^(?=.[A-Z])(?=.[!@#$%^&])[A-Za-z\d!@#$%^&]{8,15}$/;
+const phoneRegex = /^\+92\d{10}$/; // Updated to check Pakistani format (e.g., +923001234567)
 
 // Set up Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER, // Your Gmail address from .env
-    pass: process.env.EMAIL_PASS  // Your Gmail app-specific password from .env
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -25,121 +31,79 @@ router.post('/createuser', async (req, res) => {
   if (!name || !email || !password || !confirmpassword || !phonenumber || !address) {
     return res.status(400).json({ success: false, message: "All fields are required!" });
   }
+  if (!nameRegex.test(name)) {
+    return res.status(400).json({ success: false, message: "Name should contain only letters and be 3-15 characters long." });
+  }
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ success: false, message: "Invalid email format!" });
+    return res.status(400).json({ success: false, message: "Invalid email format." });
   }
-  const existingEmail = await ConsumerSignup.findOne({ email });
-  if (existingEmail) {
-    return res.status(400).json({ success: false, message: "Email is already registered!" });
-  }
-  if (phonenumber.length !== 11) {
-    return res.status(400).json({ success: false, message: "Phone number must be 11 digits long!" });
+  if (!passwordRegex.test(password)) {
+    return res.status(400).json({ success: false, message: "Password must include one uppercase letter and one special character." });
   }
   if (password !== confirmpassword) {
-    return res.status(400).json({ success: false, message: "Passwords do not match!" });
+    return res.status(400).json({ success: false, message: "Passwords do not match." });
   }
-  if (password.length < 8) {
-    return res.status(400).json({ success: false, message: "Password must be at least 8 characters long!" });
+  if (!phoneRegex.test(phonenumber)) {
+    return res.status(400).json({ success: false, message: "Phone number must be in the format +921234567890." });
   }
+
+  // Check if user already exists
+  const existingUser = await ConsumerSignup.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ success: false, message: "User with this email already exists!" });
+  }
+
+  // Hash the password before saving
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    // Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new consumer with email verification status set to false
     const consumer = new ConsumerSignup({
       name,
       email,
-      password: hashedPassword,
       phonenumber,
       address,
-      isVerified: false // Email verification flag
+      password: hashedPassword,
+      isVerified: false // Initially set to false
     });
 
-    await consumer.save();
+    const savedConsumer = await consumer.save();
 
-    // Generate email verification link
-    const verificationLink =`http://localhost:5000/api/Auth/verify/${consumer._id}`;
+    // Send verification email
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Verify Your Email',
-      text: `Hi ${name},\n\nPlease verify your email by clicking on the following link: ${verificationLink}\n\nBest regards,\nYour Service on Tab Team`
+      subject: 'Email Verification',
+      text: `Hello ${name},\n\nPlease verify your email by clicking the link: \nhttp://localhost:5000/api/Auth/verify/${savedConsumer._id}\n\nThank you!`
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-
-    res.status(201).json({ success: true, message: "Consumer created successfully! A verification email has been sent." });
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).json({ success: false, message: "Error sending email." });
+      }
+      res.status(201).json({ success: true, message: "Signup successful! Please verify your email." });
+    });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Error saving user. Please try again." });
   }
 });
 
 // Route for email verification
 router.get('/verify/:id', async (req, res) => {
-  const { id } = req.params;
+  const consumerId = req.params.id;
 
   try {
-    // Find the consumer by ID
-    const consumer = await ConsumerSignup.findById(id);
-
+    const consumer = await ConsumerSignup.findById(consumerId);
     if (!consumer) {
-      return res.status(400).json({ success: false, message: "User not found." });
+      return res.status(404).json({ success: false, message: "Consumer not found." });
     }
-
-    // Check if already verified
-    if (consumer.isVerified) {
-      return res.status(400).json({ success: false, message: "User is already verified." });
-    }
-
-    // Mark the user as verified
-    consumer.isVerified = true;
+    
+    consumer.isVerified = true; // Mark email as verified
     await consumer.save();
-
-    // Redirect to login page after successful verification
-    res.redirect('http://localhost:3000/login'); // Assuming your frontend login page is at /login
+    
+    res.status(200).json({ success: true, message: "Email verified successfully! You can now log in." });
   } catch (error) {
-    res.status(400).json({ success: false, message: "Verification failed." });
-  }
-});
-
-// Route for user login
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  // Check if email and password are provided
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: "Email and password are required." });
-  }
-
-  try {
-    // Find the consumer by email
-    const consumer = await ConsumerSignup.findOne({ email });
-    if (!consumer) {
-      return res.status(400).json({ success: false, message: "User not found." });
-    }
-
-    // Check if the user is verified
-    if (!consumer.isVerified) {
-      return res.status(400).json({ success: false, message: "Email not verified." });
-    }
-
-    // Compare passwords
-    const isMatch = await bcrypt.compare(password, consumer.password);
-    if (!isMatch) {
-      return res.status(400).json({ success: false, message: "Invalid credentials." });
-    }
-
-    // Optionally, generate a JWT token here if you're using authentication tokens
-    // const token = jwt.sign({ id: consumer._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    // Respond with success
-    res.status(200).json({ success: true, message: "Login successful!" });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error." });
+    res.status(400).json({ success: false, message: error.message });
   }
 });
 
 module.exports = router;
-

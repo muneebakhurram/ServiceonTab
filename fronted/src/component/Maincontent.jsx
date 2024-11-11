@@ -22,7 +22,7 @@ const MainContent = () => {
                     <p className="highlight-text">providers by verifying their credentials</p>
                 </div>
 
-                <div className="image-section">
+            <div className="image-section">
                     <img src={admin} alt="Background Design" className="background-decore" />
                 </div>
             </div>
