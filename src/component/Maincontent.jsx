@@ -30,17 +30,17 @@ const MainContent = () => {
             <div className="cards-container">
                 <div className="card">
                     <h3>Accept Requests</h3>
-                    <p>Pending requests: 10</p>
+                  
                     <button className="btn btn-primary" onClick={handleAcceptRequest}>View Requests</button>
                 </div>
                 <div className="card">
                     <h3>Verify Account</h3>
-                    <p>Pending verifications: 5</p>
+                  
                     <button className="btn btn-primary" onClick={handleVerifyService}>View Providers</button>
                 </div>
                 <div className="card">
                     <h3>Block Account</h3>
-                    <p>Blockable Providers: 3</p>
+                  
                     <button className="btn btn-danger" onClick={handleBlockService}>View Blocked Users</button>
                 </div>
             </div>

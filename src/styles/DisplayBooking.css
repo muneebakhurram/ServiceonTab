@@ -90,18 +90,29 @@ p.no-bookings {
     color: #6c757d;
 }
 
-/* Responsive styles for mobile devices */
-@media (max-width: 600px) {
+/* Responsive styles for tablets and smaller devices */
+@media (max-width: 768px) {
+    .booking-item {
+        flex: 0 0 calc(100% - 20px); /* Stack items in one column on smaller screens */
+    }
+
     .booking-list {
         padding: 15px;
     }
+}
 
-    .booking-item {
-        padding: 15px;
-        flex: 0 0 100%; /* Stack items in one column on smaller screens */
+/* Additional responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .booking-item h3 {
+        font-size: 1.2em;
+    }
+
+    .download-button {
+        font-size: 0.9em;
+        padding: 8px 12px;
     }
 
     .booking-image {
-        max-width: 100%;
+        max-width: 80px;
     }
 }

@@ -136,7 +136,7 @@
     }
 
     .main-heading {
-        font-size: 2rem; /* Responsive heading size */
+        font-size: 1rem; /* Responsive heading size */
     }
 
     .service-card {
@@ -147,7 +147,9 @@
     }
 
     .background-decore {
-        top: 20px; 
-        width: 100%; /* Full width for mobile */
+        top: -32px; 
+        width: 50%; /* Full width for mobile */
+        height:75px;
+        margin-left: 100px;
     }
 }

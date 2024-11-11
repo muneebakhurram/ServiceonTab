@@ -5,7 +5,7 @@ import Consumersignup from './pages/Consumersignup';
 import HomePage from './pages/HomePage';
 import MainPage from './pages/MainPage';
 import AdminDashboard from './pages/AdminDashboard';
-import DisplayServices from './pages/DisplayServices';
+import DisplayServices from './pages/DisplayServices';  // Updated import
 import ServiceProviderDashboard from './pages/ServiceProviderDashboard';
 import BookingForm from './pages/BookingForm';
 import DisplayBooking from './pages/DisplayBooking';
@@ -21,7 +21,10 @@ function App() {
           <Route exact path="/homepage" element={<HomePage />} />
           <Route exact path="/mainpage" element={<MainPage />} />
           <Route exact path="/dashboard" element={<AdminDashboard />} />
-          <Route exact path="/displayservices" element={<DisplayServices />} />
+          
+          {/* Dynamic route for service categories */}
+          <Route path="/services/:type" element={<DisplayServices />} />
+
           <Route exact path="/serviceproviderdashboard" element={<ServiceProviderDashboard />} />
           <Route exact path="/bookingform" element={<BookingForm />} />
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
