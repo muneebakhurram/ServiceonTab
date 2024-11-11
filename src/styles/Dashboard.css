@@ -18,7 +18,7 @@
 
 .img-fluid {
   max-width: 100%; /* Makes the image responsive */
-  height: auto; /* Keeps the aspect ratio intact */
+  height: auto;/* Keeps the aspect ratio intact */
 }
 
 /* Styling for the text content */
@@ -93,6 +93,73 @@
     text-align: center;
   }
 
+  .text-section,
+  .image-section {
+    flex: 1 100%; /* Ensures both sections take full width on small screens */
+    padding-right: 0;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%; /* Cards take full width on smaller screens */
+    margin-bottom: 15px;
+  }
+
+  .btn-primary,
+  .btn-danger {
+    font-size: 1rem;
+  }
+}
+/* Responsive adjustments for mobile */
+@media (max-width: 375px) {
+  .service-container {
+    flex-direction: column; /* Stack the text and image vertically */
+    text-align: center;
+  }
+  .img-fluid {
+    max-width: 100%; /* Makes the image responsive */
+    height: 200px; 
+    margin-top: 11px;
+    margin-left: 2%;/* Keeps the aspect ratio intact */
+  }
+  
+  .text-section,
+  .image-section {
+    flex: 1 100%; /* Ensures both sections take full width on small screens */
+    padding-right: 0;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%; /* Cards take full width on smaller screens */
+    margin-bottom: 15px;
+  }
+
+  .btn-primary,
+  .btn-danger {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 350px) {
+  .service-container {
+    flex-direction: column; /* Stack the text and image vertically */
+    text-align: center;
+  }
+  .img-fluid {
+    max-width: 100%; /* Makes the image responsive */
+    height: 200px; 
+    margin-top: 11px;
+    margin-left: 2%;/* Keeps the aspect ratio intact */
+  }
+  
   .text-section,
   .image-section {
     flex: 1 100%; /* Ensures both sections take full width on small screens */

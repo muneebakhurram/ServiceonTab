@@ -77,7 +77,7 @@
 
 .search-icon {
   position: absolute;
-  left: 10px;
+  right: 7px;
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
@@ -165,7 +165,7 @@ button:hover {
   }
 
   .navigation {
-    flex-direction: column; /* Stack navigation items */
+    flex-direction: row; /* Stack navigation items */
     gap: 10px;
     margin-top: 10px;
   }

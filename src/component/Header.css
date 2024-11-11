@@ -82,46 +82,5 @@
   }
 }
 
-@media (max-width: 480px) { /* For mobile phones */
-  .header {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start;
-    padding: 10px;
-  }
 
-  .logo img {
-    height: 40px;
-  }
 
-  .logo-text h1 {
-    font-size: 16px;
-    text-align: left;
-  }
-
-  .logo-text p {
-    font-size: 12px;
-    text-align: left;
-  }
-}
-
-/* Specific adjustments for iPhone SE (320px wide) */
-@media (max-width: 320px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px;
-  }
-
-  .logo img {
-    height: 35px; /* Smaller logo for extra-small screen */
-    margin-right: 5px;
-  }
-
-  .logo-text h1 {
-    font-size: 14px; /* Reduce font size */
-  }
-
-  .logo-text p {
-    font-size: 11px;
-  }
-}

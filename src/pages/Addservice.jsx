@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../component/Servicesheader';
 import Footer from '../component/Footer';
 import '../styles/Addservice.css';
 
 const AddService = () => {
+  const navigate = useNavigate();  // Used for navigation
   const initialState = { name: '', estimatedCharges: '', type: '', picture: null };
   const [service, setService] = useState(initialState);
   const [error, setError] = useState('');
@@ -62,13 +64,16 @@ const AddService = () => {
         setSuccess("Service added successfully!");
         setError('');
         setService(initialState); // Reset form after success
+
+        // Redirect to the relevant service category page
+        navigate(`/services/${service.type.toLowerCase()}`);  // Redirect based on the service type
       } else {
         setError(result.message);
         setSuccess('');
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setError("Failed to create account.");
+      setError("Failed to add service.");
     }
   };
 
@@ -114,6 +119,7 @@ const AddService = () => {
               <option value="Plumber">Plumber</option>
               <option value="Electrician">Electrician</option>
               <option value="Mechanic">Mechanic</option>
+              {/* Add other service types as needed */}
             </select>
           </div>
           <div className="form-group">
