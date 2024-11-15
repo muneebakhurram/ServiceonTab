@@ -1,63 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/login.css'; // Updated CSS file
 import axios from 'axios';
 import HeaderLogin from "../component/HeaderLogin";
 import Footer from "../component/Footer";
 
-export const Login = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setErrorMessage("");
-    setLoading(true);
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setErrorMessage("Invalid email format.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      // Attempting to log in as a consumer
-      const response = await axios.post('http://localhost:5000/api/Auth/login', {
-        email,
-        password,
-      });
-
-      if (response.data.success) {
-        navigate('/homepage'); // Navigate to Homepage after successful login
-      } else {
-        setErrorMessage("Login failed. Please check your credentials.");
+const Providerlogin = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [verificationError, setVerificationError] = useState(""); 
+    
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      if (token) {
+       
+        axios.post('http://localhost:5000/api/Admin/verify-email', { token })
+          .then((response) => {
+            if (response.data.success) {
+              setVerificationError('Verification successful! You can now log in.');
+          
+            } else {
+              setVerificationError("Verification failed. Please try again.");
+            }
+          })
+          .catch(() => {
+            setVerificationError("Verification failed. Please try again.");
+          });
       }
-    } catch (error) {
-      if (error.response) {
-        if (error.response.data.message === "Email not verified or not registered.") {
-          setErrorMessage("Please verify your email before logging in.");
-        } else {
-          setErrorMessage(error.response.data.message || "Login failed. Please try again.");
+    }, [navigate]);
+    
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+  
+
+      try {
+        const response = await axios.post('http://localhost:5000/api/Provider/Providerlogin', { email, password });
+        if (response.data.success) {
+          navigate('/serviceproviderdashboard'); // Redirect to service provider dashboard upon successful login
         }
-      } else {
-        setErrorMessage("Network error. Please try again.");
+      } catch (error) {
+        setErrorMessage("Login failed. Please check your email and password.");
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
 
-   
-
-    // Check for admin credentials
-    if (email === "37925@riphah.edu.pk" && password === "JSM123@") {
-      navigate('/dashboard'); // Navigate to Admin page
-    }
-  };
-
+      if (email === "37925@riphah.edu.pk" && password === "JSM123@") {
+        navigate('/dashboard'); // Navigate to Admin page
+      }
+    };
   return (
     <section className="vh-100 login-page-consumer">
       <HeaderLogin />
@@ -74,8 +70,9 @@ export const Login = () => {
           <div className="col-md-6">
             <div className="login-form-shadow">
               <form onSubmit={handleLogin}>
+                
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
-
+                {verificationError && <p className={verificationError.includes('successful') ? "success-message" : "error-message"}>{verificationError}</p>}
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <label className="form-label">Email address</label>
@@ -127,4 +124,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default Providerlogin;

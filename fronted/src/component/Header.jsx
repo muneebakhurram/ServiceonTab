@@ -32,7 +32,7 @@ const Header = () => {
                 </button>
                 <button 
                     className="btn btn-primary" 
-                    onClick={() => window.location.href='/login'}
+                    onClick={() => window.location.href='/Providerlogin'}
                 >
                     Login
                 </button>

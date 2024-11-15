@@ -5,6 +5,7 @@ import '../styles/BookingForm.css';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for back button functionality
 
 const BookingForm = () => {
+    const [message, setMessage] = useState(null);
     const [formData, setFormData] = useState({
         serviceName: '',
         problemDescription: '',
@@ -48,13 +49,13 @@ const BookingForm = () => {
 
             const result = await response.json();
             if (result.success) {
-                alert("Booking created successfully!");
+                setMessage({ text: "Booking request is sent!", type: 'success' });
             } else {
-                alert(result.message);
+                setMessage({ text: result.message, type: 'error' });
             }
         } catch (error) {
             console.error("Error submitting form:", error);
-            alert("Failed to create booking.");
+        setMessage({ text: "Failed to book.", type: 'error' });
         }
     };
 
@@ -62,6 +63,11 @@ const BookingForm = () => {
         <div >
             <Headeruser />
             <div className="booking-card">
+            {message && (
+                    <div className={`message ${message.type}`}>
+                        {message.text}
+                    </div>
+                )}
                 <h2>Booking Service</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

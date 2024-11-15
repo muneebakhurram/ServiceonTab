@@ -26,7 +26,7 @@ const Headeradmin = () => {
   const handleApprove = async (id) => {
     try {
       await axios.post(`http://localhost:5000/api/Admin/accept/${id}`, { isAccepted: true });
-      alert('Admin approved!');
+      alert('Provider approved!');
       setPendingRequests(pendingRequests.filter(request => request._id !== id));
     } catch (error) {
       alert('Error approving provider.');
@@ -37,7 +37,7 @@ const Headeradmin = () => {
   const handleReject = async (id) => {
     try {
       await axios.post(`http://localhost:5000/api/Admin/accept/${id}`, { isAccepted: false });
-      alert('Admin rejected!');
+      alert('Provider rejected!');
       setPendingRequests(pendingRequests.filter(request => request._id !== id));
     } catch (error) {
       alert('Error rejecting provider.');
@@ -48,18 +48,24 @@ const Headeradmin = () => {
   const handleDownload = async (filePath) => {
     try {
       const response = await axios.get(filePath, { responseType: 'blob' });
-      const contentType = response.headers['content-type'];
-      const blob = new Blob([response.data], { type: contentType });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = filePath.split('/').pop(); // Get filename from URL path
-      downloadLink.click();
-      URL.revokeObjectURL(downloadLink.href); // Clean up
+      if (response.status === 200) {
+        const contentType = response.headers['content-type'];
+        const blob = new Blob([response.data], { type: contentType });
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = filePath.split('/').pop();
+        downloadLink.click();
+        URL.revokeObjectURL(downloadLink.href);
+      } else {
+        console.error('Error: Unexpected response status', response.status);
+        alert('Unexpected error occurred. Please try again.');
+      }
     } catch (error) {
       console.error('Download failed:', error);
       alert('Error downloading file. Please try again.');
     }
   };
+  
 
   useEffect(() => {
     fetchRequests(); // Fetch pending requests when component mounts
@@ -91,13 +97,13 @@ const Headeradmin = () => {
               {pendingRequests.length === 0 ? (
                 <p>No pending requests</p>
               ) : (
-                pendingRequests.map((request) => (
-                  <div key={request._id} className="request-item">
-                    <p><strong>Name:</strong> {request.name}</p>
+                pendingRequests.map((providerId) => (
+                  <div key={providerId._id} className="request-item">
+                    <p><strong>Name:</strong> {providerId.name}</p>
             
                     <p><strong>CNIC (Back):</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicBack/${request._id}`)} 
+                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicBack/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
@@ -105,7 +111,7 @@ const Headeradmin = () => {
 
                     <p><strong>CNIC (Front):</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicFront/${request._id}`)} 
+                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicFront/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
@@ -113,17 +119,17 @@ const Headeradmin = () => {
 
                     <p><strong>Police Certificate:</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/clearanceCertificate/${request._id}`)} 
+                        onClick={() => handleDownload(`http://localhost:5000/api/Provider/download/clearanceCertificate/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
                     </p>
                     <div className="request-actions">
                       <button 
-                        onClick={() => handleApprove(request._id)} 
+                        onClick={() => handleApprove(providerId._id)} 
                         className="approve-btn">Accept</button>
                       <button 
-                        onClick={() => handleReject(request._id)} 
+                        onClick={() => handleReject(providerId._id)} 
                         className="reject-btn">Reject</button>
                     </div>
                   </div>

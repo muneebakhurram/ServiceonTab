@@ -10,6 +10,9 @@ import MainComponent from './pages/MainComponent';
 import BookingForm from './pages/BookingForm';
 import Servicesignup from './pages/Signupp.jsx';
 import AdminDashboard from './pages/AdminDashboard';
+import Providerlogin from './pages/Providerlogin';
+
+
 
 
 function App() {
@@ -29,6 +32,8 @@ function App() {
             <Route exact path="/booking" element={<BookingForm />} /> 
             <Route path="/service-signup" element={<Servicesignup />} />
             <Route exact path="/dashboard" element={<AdminDashboard />} />
+            <Route path="/Providerlogin" element={<Providerlogin />} />
+          
 
 
           </Routes>

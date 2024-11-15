@@ -17,7 +17,9 @@ const MainPage = () => {
                         <p className="sub-headings">We offer home services designed to maximize efficiency,</p>
                         <p className="highlight">minimizing time, energy, and cost.</p>
                         
-                        <button className="signup-btn">Sign up</button>
+                        <button className="signup-btn">
+                           <a href="/consumersignup" style={{ color: 'inherit', textDecoration: 'none' }}>Sign up</a>
+                        </button>
                         <p className="log-in-text">
                             Do you have an account? <a href="/login">Login</a>
                         </p>

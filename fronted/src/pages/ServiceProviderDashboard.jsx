@@ -20,7 +20,7 @@ const ServiceProviderDashboard = ({ user }) => {
             {/* Header */}
             <Headerserviceprovider user={user} onLogout={() => {}} />
 
-            <div className="service-container">
+          <div className="service-container">
                 <div className="text-section">
                     <h1 className="main-heading">Simplify Your Life with Our Professional Home Service</h1>
                     <p className="sub-heading">We offer home services designed to maximize efficiency,</p>
