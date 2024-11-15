@@ -46,6 +46,21 @@ const DisplayBooking = () => {
         }
     };
 
+    // Function to trigger image download
+    const handleDownload = (imagePath) => {
+        fetch(`http://localhost:5000/${imagePath}`)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = imagePath.split('/').pop(); // Set the filename to download
+                a.click();
+                window.URL.revokeObjectURL(url); // Clean up after download
+            })
+            .catch(error => console.error('Error downloading image:', error));
+    };
+
     if (error) {
         return <p className="error-message">{error}</p>;
     }
@@ -81,21 +96,20 @@ const DisplayBooking = () => {
                                     )}
                                 </div>
                                 <div className="button-container">
-                                    <a
-                                        href={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
-                                        download
-                                        className="download-button"
-                                    >
-                                        Download Image
-                                    </a>
-                                    <a
-                                        href={`http://localhost:5000/${booking.image}`} // Ensure the correct path to the image
-                                        download
-                                        className="download-button"
+                                    {booking.image && (
+                                        <button
+                                            onClick={() => handleDownload(booking.image)} // Trigger download
+                                            className="download-button"
+                                        >
+                                            Download Image
+                                        </button>
+                                    )}
+                                    <button
+                                        onClick={() => handleCancelBooking(booking._id)} // Cancel booking
+                                        className="cancel-button"
                                     >
                                         Cancel Booking
-                                    </a>
-                                    
+                                    </button>
                                 </div>
                             </div>
                         ))}

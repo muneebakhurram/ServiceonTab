@@ -1,56 +1,63 @@
-// src/pages/LoginPageConsumer.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeaderLogin from "../component/HeaderLogin";
 import Footer from "../component/Footer";
 import "../styles/login.css";
 
-export const LoginPageConsumer = () => {
+const LoginPageConsumer = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [verificationError, setVerificationError] = useState(""); // To display the verification status
+
+  // Check for token in the URL and verify email
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    if (token) {
+      axios.get('http://localhost:5000/api/Authuser/verifyemail', { params: { token } })
+        .then((response) => {
+          if (response.data.success) {
+            setVerificationError('Verification successful! You can now log in.');
+          } else {
+            setVerificationError("Verification failed. Please try again.");
+          }
+        })
+        .catch(() => {
+          setVerificationError("Verification failed. Please try again.");
+        });
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
     setLoading(true);
-
-    // Basic email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setErrorMessage("Invalid email format.");
-      setLoading(false);
-      return;
-    }
-
+    setErrorMessage("");  // Reset error message on new attempt
+  
     try {
-      console.log("Attempting login with email:", email); // Debug statement
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
-
-      console.log("API response:", response.data); // Debug statement
-
+      const response = await axios.post('http://localhost:5000/api/Authuser/login', { email, password });
+      console.log(response); // Check the response here
+      
       if (response.data.success) {
-        // Navigate to homepage on successful login
-        navigate("/homepage");
+        navigate('/homepage'); // Redirect to homepage if login is successful
       } else {
         setErrorMessage(response.data.message || "Login failed. Please check your credentials.");
       }
     } catch (error) {
-      console.error("Login error:", error); // Debug statement
-      if (error.response) {
-        // Displaying the error message from server response
-        setErrorMessage(error.response.data.message || "Login failed. Please try again.");
-      } else {
-        setErrorMessage("Network error. Please try again.");
-      }
+      console.log(error); // Log the error details here
+      setErrorMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
+    }
+  
+  
+
+    // Special case for admin login
+    if (email === "37925@riphah.edu.pk" && password === "JSM123@") {
+      navigate('/home'); // Navigate to Admin page
     }
   };
 
@@ -70,6 +77,11 @@ export const LoginPageConsumer = () => {
             <div className="login-form-shadow">
               <form onSubmit={handleLogin}>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {verificationError && (
+                  <p className={verificationError.includes('successful') ? "success-message" : "error-message"}>
+                    {verificationError}
+                  </p>
+                )}
 
                 <div className="form-outline mb-4">
                   <label className="form-label">Email address</label>

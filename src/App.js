@@ -10,6 +10,7 @@ import ServiceProviderDashboard from './pages/ServiceProviderDashboard';
 import BookingForm from './pages/BookingForm';
 import DisplayBooking from './pages/DisplayBooking';
 import AddService from './pages/Addservice';
+// import SignupForm from './pages/SignupForm';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/bookingform" element={<BookingForm />} />
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
           <Route exact path="/Addservice" element={<AddService />} />
+          {/* <Route exact path="/signupform" element={<SignupForm />} /> */}
         </Routes>
       </div>
     </Router>
