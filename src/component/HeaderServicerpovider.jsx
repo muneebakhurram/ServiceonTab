@@ -1,16 +1,54 @@
-import React from "react";
-import logo from '../assests/images/logo.png'; // Adjust the path if necessary
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import logo from '../assests/images/logo.png';
 import "./HeaderServiceprovider.css";
 
-const HeaderServiceProvider = ({ user, onLogout }) => {
-    const scrollToSection = (id) => {
-        const section = document.getElementById(id);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.error(`No section found with id: ${id}`); // Corrected this line
+
+
+const HeaderServiceprovider = () => {
+
+    const [pendingRequests, setPendingRequests] = useState([]);
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+
+    const fetchRequests = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/api/BookingRequest/pending-requests');
+          setPendingRequests(response.data);
+        } catch (error) {
+          console.error('Error fetching requests:', error);
         }
-    };
+      };
+
+    const toggleDropdown = () => {
+        setDropdownVisible(!dropdownVisible);
+      };
+
+
+      const handleApprove = async (id) => {
+        try {
+          await axios.post(`http://localhost:5000/api/BookingRequest/accept/${id}`, { isAccepted: true });
+          alert('Provider approved!');
+          setPendingRequests(pendingRequests.filter(request => request._id !== id));
+        } catch (error) {
+          alert('Error approving provider.');
+        }
+      };
+
+
+      const handleReject = async (id) => {
+        try {
+          await axios.post(`http://localhost:5000/api/BookingRequest/accept/${id}`, { isAccepted: false });
+          alert('Provider rejected!');
+          setPendingRequests(pendingRequests.filter(request => request._id !== id));
+        } catch (error) {
+          alert('Error rejecting provider.');
+        }
+      };
+
+      useEffect(() => {
+        fetchRequests(); // Fetch pending requests when component mounts
+      }, []);
+
 
     return (
         <header className="header">
@@ -22,24 +60,54 @@ const HeaderServiceProvider = ({ user, onLogout }) => {
                 </div>
             </div>
             <nav className="navigation">
-                <a href="#home" onClick={() => scrollToSection('home')}>Home</a>
-                <a href="#services" onClick={() => scrollToSection('services')}>Services</a>
-                <a href="#add-service" onClick={() => scrollToSection('add-service')}>Add Service</a>
-                <a href="#faq" onClick={() => scrollToSection('faq')}>FAQ</a>
-                <a href="#footer" onClick={() => scrollToSection('footer')}>Contact Us</a>
+                <a href="#home">Home</a>
+                <a href="#services">Add Services</a> 
+                <a href="#ourservices">Services</a> 
+                <div className="dropdown">
+                    <a
+                        href="#bookingrequest"
+                        className="request-link"
+                        onClick={toggleDropdown}
+                    >
+                        Request
+                    </a>
+                    {dropdownVisible && (
+                        <div className="dropdown-content">
+                            {pendingRequests.length === 0 ? (
+                                <p>No pending requests</p>
+                            ) : (
+                                pendingRequests.map((bookingId) => (
+                                    <div key={bookingId._id} className="request-item">
+                                        <p><strong>Service Name:</strong> {bookingId.serviceName}</p>
+
+                                        <p><strong>Estimated Charges:</strong> {bookingId.estimatedCharges}</p>
+
+                                        <p><strong>Time:</strong> {bookingId.time}</p>
+
+                                        <p><strong>Date:</strong> {bookingId.date}</p>
+
+                                        <div className="request-actions">
+                                            <button 
+                                                onClick={() => handleApprove(bookingId._id)} 
+                                                className="approve-btn">Accept</button>
+                                            <button 
+                                                onClick={() => handleReject(bookingId._id)} 
+                                                className="reject-btn">Reject</button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )}
+                </div>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact Us</a>
             </nav>
-            <div className="search-login d-flex align-items-center">
-                {user ? (
-                    <div className="user-greeting">
-                        <span>Welcome, {user.name}!</span>
-                        <button onClick={onLogout} className="logout-button">Logout</button>
-                    </div>
-                ) : (
-                    <a href="/login">Login</a>
-                )}
+            <div className="logout">
+            <button className="btn btn-primary" onClick={() => window.location.href='/Providerlogin'}>Logout</button>
             </div>
         </header>
     );
 };
 
-export default HeaderServiceProvider;
+export default HeaderServiceprovider;

@@ -1,83 +1,232 @@
-/* Header Styles */
+/* Main Header Styling */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    height: 10% !important; /* Ensures consistent header height */
-}
-
-.logo {
+    justify-content: space-between;
+    padding: 15px 40px; /* Adjusted padding for more space */
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  /* Logo and Text Styling */
+  .logo {
     display: flex;
     align-items: center;
-    cursor: pointer; 
-}
-
-.logo img {
-    height: 66px !important; /* Consistent smaller logo height */
-    margin-right: 15px; 
-    transition: transform 0.3s ease; 
-}
-
-.logo:hover img {
-    transform: scale(1.1); /* Hover effect for logo */
-}
-
-.logo-text {
+    gap: 15px; /* More space between logo image and text */
+  }
+  
+  .logo img {
+    height: 60px; /* Adjust logo size for better visibility */
+  }
+  
+  .logo-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.logo-text .highlight {
-    color: #007bff; /* Highlighted text color */
-}
-
-.logo-text h1 {
-    margin-top: -13px !important;
-    font-size: 16px; /* Larger font size for header text */
-    font-weight: bold;
-}
-
-.logo-text p {
+  }
+  
+  .logo-text h1 {
     margin: 0;
-    font-size: 13px; /* Larger paragraph text */
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .logo-text .highlight {
+    color: #007bff;
+  }
+  
+  .logo-text p {
+    margin: 0;
+    font-size: 14px;
     color: #666;
-}
-
-.navigation {
+  }
+  
+  /* Centering Navigation Links */
+  .navigation {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 30px; /* Increased gap between links */
-    justify-content: center; /* Center the navigation links */
-    flex-grow: 1; /* Allow navigation to grow and take up available space */
-}
-
-.navigation a {
+    gap: 30px;
+    align-items: center;
+  }
+  
+  .navigation a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    transition: color 0.3s; /* Transition for hover effect */
-}
-
-.navigation a:hover {
-    color: #007bff; /* Change color on hover */
-}
-
-.search-login {
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .navigation a:hover {
+    color: #007bff;
+  }
+  
+  /* Logout Button Styling */
+  .logout {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between buttons */
-}
-
-.user-greeting {
-    font-size: 14px;
-}
-
-.logout-button {
-    background: none;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
-    color: #007bff;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 14px;
-    text-decoration: underline; /* Style to indicate it's clickable */
-}
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100px;
+    text-align: center;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Fixing Full Button Color */
+  button:active {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Styling for Smaller Screens */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      padding: 10px 20px;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    .navigation {
+      flex-direction: column;
+      position: static;
+      transform: none;
+      gap: 15px;
+    }
+  
+    .logout {
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo img {
+      height: 50px;
+    }
+  
+    .logo-text h1 {
+      font-size: 20px;
+    }
+  
+    .navigation a {
+      font-size: 14px;
+    }
+  
+    button {
+      font-size: 12px;
+      padding: 8px 16px;
+      width: auto;
+    }
+  }
+  .request-link {
+    transition: color 0.3s ease;
+  }
+  .request-link:hover {
+    color: #007bff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  
+  /* Dropdown styles */
+  .dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .request-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: default; /* Ensure non-clickable area remains non-clickable */
+    z-index: 5;
+  }
+  
+  .request-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .request-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .request-details p {
+    margin: 5px 0;
+  }
+  
+  .request-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .request-actions button {
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+  }
+  
+  .approve-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+  
+  .approve-btn:hover {
+    background-color: #218838;
+  }
+  
+  .reject-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
+  .reject-btn:hover {
+    background-color: #c82333;
+  }
+  
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navigation a {
+      margin: 5px 0;
+    }
+  }
