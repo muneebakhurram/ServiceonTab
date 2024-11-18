@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="footer-content">
                 <div className="footer-section logo-section">
                 <h1>
-                        Service on <span className="highlight">Tab</span>
+                        Service on Tab
                     </h1>
                     <p className="maintenance-text">Maintain and repair</p>
                     <p>
@@ -65,3 +65,5 @@ const Footer = () => {
 }
 
 export default Footer;
+
+//salika arbab

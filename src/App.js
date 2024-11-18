@@ -10,7 +10,9 @@ import ServiceProviderDashboard from './pages/ServiceProviderDashboard';
 import BookingForm from './pages/BookingForm';
 import DisplayBooking from './pages/DisplayBooking';
 import AddService from './pages/Addservice';
-// import SignupForm from './pages/SignupForm';
+ import SignupForm from './pages/SignupForm';
+ import Providersignup from './pages/Signupp';
+ import Providerlogin from './pages/Providerlogin';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route exact path="/consumersignup" element={<Consumersignup />} />
           <Route exact path="/homepage" element={<HomePage />} />
           <Route exact path="/mainpage" element={<MainPage />} />
+          <Route path="/Providerlogin" element={<Providerlogin />} />
+          <Route exact path="/providersignup" element={<Providersignup />} />
           <Route exact path="/dashboard" element={<AdminDashboard />} />
           
           {/* Dynamic route for service categories */}
@@ -30,7 +34,7 @@ function App() {
           <Route exact path="/bookingform" element={<BookingForm />} />
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
           <Route exact path="/Addservice" element={<AddService />} />
-          {/* <Route exact path="/signupform" element={<SignupForm />} /> */}
+          { <Route exact path="/signupform" element={<SignupForm />} /> }
         </Routes>
       </div>
     </Router>

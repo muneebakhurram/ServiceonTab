@@ -1,6 +1,6 @@
 import React from 'react';
 import decore from '../assests/images/Rectangle 1.png';
-import mainpic from '../assests/images/main.png';
+import image from '../assests/images/main.png';
 import electrtion from '../assests/images/Electrtion.png';
 import plumber from '../assests/images/plumber.png';
 import mechnic from '../assests/images/mechnic.png';
@@ -29,7 +29,7 @@ function HomePage() {
               
               <div className="image-section">
                   
-                  <img src={mainpic} alt="Handyman with tools" className="main-pic" />
+                  <img src={image} alt="Handyman with tools" className="main-pic" />
               </div>
           </div>
 

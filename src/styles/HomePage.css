@@ -110,7 +110,7 @@ body {
 
  
 }
-/* Services Section */
+
 .services-section {
   padding: 50px 50px;
   
@@ -125,46 +125,44 @@ body {
 
 .line-image {
   display: block;
-  margin: 0 auto 30px auto; /* Center the line image */
-  width: 750px; /* Adjust the line width */
+  margin: 0 auto 30px auto; 
+  width: 750px; 
  
 }
 
 .services-boxes {
   display: flex;
-  justify-content: center; /* Center align horizontally */
-  gap: 40px; /* Space between each service */
-  align-items: center; /* Align text and icons vertically */
-  flex-wrap: nowrap; /* Ensure everything stays in one row */
- 
-
+  justify-content: center; 
+  gap: 40px; 
+  align-items: center; 
+  flex-wrap: nowrap; 
 }
+
 
 .service-box {
   text-align: center;
-  cursor: pointer; /* Clickable style */
-  transition: transform 0.3s ease; /* Slight hover effect */
-  height: 200px;
+  cursor: pointer; 
+  transition: transform 0.3s ease; 
   width: 200px;
   
 }
 
 .service-box:hover {
-  transform: scale(1.1); /* Slight zoom effect on hover */
+  transform: scale(1.1); 
 }
 
 .service-image {
-  width: 150px; /* Adjust the width for larger but balanced size */
-  height: auto; /* Maintain aspect ratio to avoid distortion */
-  margin-bottom: 5px; /* Space between the icon and text */
+
+  margin-bottom: 5px; 
 }
+
 
 
 .service-text {
   font-weight: bold;
   font-size: 1rem;
   color: #333;
-  margin: 0; /* Remove unnecessary spacing */
+  margin: 0; 
 }
 
 
@@ -172,7 +170,7 @@ body {
   height: 500px;
   position: relative;
   width: 100px;
- 
+  margin-top: 4%;
   
 }
 

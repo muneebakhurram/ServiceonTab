@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import logo from '../assests/images/logo.png';
-import '../component/Headeradmin.css';
+import './Headeradmin.css';
 
 const Headeradmin = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
