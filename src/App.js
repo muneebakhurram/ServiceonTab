@@ -13,7 +13,7 @@ import AddService from './pages/Addservice';
  import SignupForm from './pages/SignupForm';
  import Providersignup from './pages/Signupp';
  import Providerlogin from './pages/Providerlogin';
-
+ import Signupp from './pages/Signupp';
 function App() {
   return (
     <Router>
@@ -35,6 +35,7 @@ function App() {
           <Route exact path="/displaybooking" element={<DisplayBooking />} />
           <Route exact path="/Addservice" element={<AddService />} />
           { <Route exact path="/signupform" element={<SignupForm />} /> }
+          <Route exact path="/signupp" element={<Signupp />} />
         </Routes>
       </div>
     </Router>
