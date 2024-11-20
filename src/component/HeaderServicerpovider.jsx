@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import logo from '../assests/images/logo.png';
 import "./HeaderServiceprovider.css";
@@ -9,6 +10,8 @@ const HeaderServiceprovider = () => {
 
     const [pendingRequests, setPendingRequests] = useState([]);
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [notification, setNotification] = useState(null);
+    const navigate = useNavigate();
 
     const fetchRequests = async () => {
         try {
@@ -23,14 +26,20 @@ const HeaderServiceprovider = () => {
         setDropdownVisible(!dropdownVisible);
       };
 
+      const showNotification = (type, message) => {
+        setNotification({ type, message });
+        setTimeout(() => {
+            setNotification(null); // Automatically remove the notification after 2 seconds
+        }, 2000);
+    };
 
       const handleApprove = async (id) => {
         try {
           await axios.post(`http://localhost:5000/api/BookingRequest/accept/${id}`, { isAccepted: true });
-          alert('Provider approved!');
-          setPendingRequests(pendingRequests.filter(request => request._id !== id));
+          showNotification('success', ' Approved!');
+            setPendingRequests(pendingRequests.filter(request => request._id !== id));
         } catch (error) {
-          alert('Error approving provider.');
+          setNotification({ type: 'error', message: 'Error approving the request.' });
         }
       };
 
@@ -38,16 +47,21 @@ const HeaderServiceprovider = () => {
       const handleReject = async (id) => {
         try {
           await axios.post(`http://localhost:5000/api/BookingRequest/accept/${id}`, { isAccepted: false });
-          alert('Provider rejected!');
-          setPendingRequests(pendingRequests.filter(request => request._id !== id));
+          showNotification('success', 'Rejected!');
+            setPendingRequests(pendingRequests.filter(request => request._id !== id));
         } catch (error) {
-          alert('Error rejecting provider.');
+          setNotification({ type: 'error', message: 'Error rejecting the request.' });
         }
       };
 
       useEffect(() => {
         fetchRequests(); // Fetch pending requests when component mounts
       }, []);
+
+      const handleLogout = () => {
+        navigate('/Providerlogin');
+    };
+
 
 
     return (
@@ -61,8 +75,8 @@ const HeaderServiceprovider = () => {
             </div>
             <nav className="navigation">
                 <a href="#home">Home</a>
-                <a href="#services">Add Services</a> 
-                <a href="#ourservices">Services</a> 
+                <a href="#aservice">Add Services</a> 
+                <a href="#myservices">Services</a> 
                 <div className="dropdown">
                     <a
                         href="#bookingrequest"
@@ -100,12 +114,17 @@ const HeaderServiceprovider = () => {
                         </div>
                     )}
                 </div>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact Us</a>
+                <a href="#footer">FAQ</a>
+                <a href="#footer">Contact Us</a>
             </nav>
             <div className="logout">
-            <button className="btn btn-primary" onClick={() => window.location.href='/Providerlogin'}>Logout</button>
+                <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
             </div>
+            {notification && (
+                <div className={`notification ${notification.type}`}>
+                    {notification.message}
+                </div>
+            )}
         </header>
     );
 };

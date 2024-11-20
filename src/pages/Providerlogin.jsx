@@ -4,6 +4,9 @@ import '../styles/login.css'; // Updated CSS file
 import axios from 'axios';
 import HeaderLogin from "../component/HeaderLogin";
 import Footer from "../component/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 
 const Providerlogin = () => {
     const [email, setEmail] = useState("");
@@ -11,10 +14,21 @@ const Providerlogin = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [verificationError, setVerificationError] = useState(""); 
+    const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false); 
     
     const navigate = useNavigate();
   
     useEffect(() => {
+      const savedEmail = localStorage.getItem("email");
+    const savedPassword = localStorage.getItem("password");
+    if (savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+
+
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get('token');
       if (token) {
@@ -42,7 +56,15 @@ const Providerlogin = () => {
       try {
         const response = await axios.post('http://localhost:5000/api/Provider/Providerlogin', { email, password });
         if (response.data.success) {
-          navigate('/serviceproviderdashboard'); // Redirect to service provider dashboard upon successful login
+          if (rememberMe) {
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password); 
+          } else {
+            localStorage.removeItem("email"); 
+            localStorage.removeItem("password"); 
+          }
+  
+          navigate('/serviceproviderdashboard'); 
         }
       } catch (error) {
         setErrorMessage("Login failed. Please check your email and password.");
@@ -54,13 +76,26 @@ const Providerlogin = () => {
         navigate('/dashboard'); // Navigate to Admin page
       }
     };
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+  
+    const handleRememberMeChange = (e) => {
+      setRememberMe(e.target.checked);
+    };
+
+    const navigateToSignup = () => {
+      navigate('/providersignup');
+    };
+
   return (
     <section className="vh-100 login-page-consumer">
       <HeaderLogin />
       <div className="container py-5 h-100">
         <div className="row d-flex align-items-center justify-content-center h-100">
           <div className="col-md-6 d-none d-md-block">
-            {/* Image parallel to the form */}
+         
             <img 
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" 
               className="img-fluid login-image" 
@@ -86,17 +121,23 @@ const Providerlogin = () => {
                   />
                 </div>
 
-                {/* Password input */}
                 <div className="form-outline mb-4">
                   <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <div className="password-field">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control form-control-lg"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      onClick={togglePasswordVisibility}
+                      className="eye-icon"
+                    />
+                  </div>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -105,10 +146,14 @@ const Providerlogin = () => {
                       className="form-check-input"
                       type="checkbox"
                       id="form1Example3"
+                      checked={rememberMe}
+                      onChange={handleRememberMeChange}
                     />
-                    <label className="form-check-label" htmlFor="form1Example3"> Remember me </label>
+                    <label className="form-check-label" htmlFor="form1Example3">
+                      Remember me
+                    </label>
                   </div>
-                  <a href="/consumersignup">Create Account?</a> {/* Navigate to Consumer Signup */}
+                  <a href="#" onClick={navigateToSignup}>Create Account?</a>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-lg btn-block login-btn" disabled={loading}>

@@ -113,7 +113,7 @@ body, html {
 }
 
 .approve-btn {
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
   border: none;
 }
@@ -157,7 +157,97 @@ body, html {
   }
 }
 
-/* Ensure Content Starts Below Header */
+
 body {
   padding-top: 0px; /* Add space for the fixed header */
 }
+
+
+.admin-label {
+  font-size: 16px;             
+  font-weight: 600;              
+  color: #007bff;              
+  margin-right: 15px;             
+  display: inline-block;          
+  vertical-align: middle;       
+  font-family: 'Arial', sans-serif; 
+  text-transform: capitalize;     
+}
+
+
+.dropdown-content {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recent-actions {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.recent-item {
+  margin-bottom: 10px;
+}
+
+.recent-item.approved {
+  border-left: 4px solid green;
+  padding-left: 8px;
+}
+
+.recent-item.rejected {
+  border-left: 4px solid red;
+  padding-left: 8px;
+}
+
+.status-label {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-label.approved {
+  color: green;
+}
+
+.status-label.rejected {
+  color: red;
+}
+.notification {
+  position: fixed;
+  top: 20px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #fff !important; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out; 
+}
+
+/* Success and Error Notifications */
+.notification.success {
+  background-color:  #007bff;
+}
+
+.notification.error {
+  background-color: #f44336; 
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+
+

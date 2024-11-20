@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'; 
 import logo from '../assests/images/logo.png';
 import searchIcon from '../assests/images/icon.png';
 import "./Headeruser.css";
 
 const Headeruser = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        navigate('/login');
+    };
+
+
     return (
         <header className="header">
             <div className="logo">
@@ -16,8 +23,8 @@ const Headeruser = () => {
             <nav className="navigation">
                 <a href="#home">Home</a>
                 <a href="#ourservices">Services</a> 
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact Us</a>
+                <a href="#footer">FAQ</a>
+                <a href="#footer">Contact Us</a>
             </nav>
             <div className="search-login">
                 <div className="search-box">
@@ -25,7 +32,7 @@ const Headeruser = () => {
                     <img src={searchIcon} alt="Search" className="search-icon" />
                 </div>
              
-                <button>Logout</button>
+                <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
             </div>
         </header>
     );

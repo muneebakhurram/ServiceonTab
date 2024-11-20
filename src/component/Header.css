@@ -84,4 +84,41 @@
 }
 
 
+/* Styling for the login message */
+.login-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff; /* Primary blue color for the background */
+  color: #ffffff; /* White text color for contrast */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px; /* Spacing inside the message */
+  font-size: 16px; /* Text size for readability */
+  font-weight: 500; /* Slightly bold text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensures the message appears above other elements */
+  animation: fade-in-out 3s ease-in-out; /* Animation for smooth appearance and disappearance */
+  text-align: center; /* Center-align text */
+}
+
+/* Animation for showing and hiding the login message */
+@keyframes fade-in-out {
+  0% {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  10% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  90% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+}
 

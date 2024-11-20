@@ -4,6 +4,8 @@ import axios from "axios";
 import HeaderLogin from "../component/HeaderLogin";
 import Footer from "../component/Footer";
 import "../styles/login.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const LoginPageConsumer = () => {
   const navigate = useNavigate();
@@ -12,9 +14,19 @@ const LoginPageConsumer = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [verificationError, setVerificationError] = useState(""); // To display the verification status
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false); 
 
   // Check for token in the URL and verify email
   useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    const savedPassword = localStorage.getItem("password");
+    if (savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     if (token) {
@@ -42,7 +54,16 @@ const LoginPageConsumer = () => {
       console.log(response); // Check the response here
       
       if (response.data.success) {
-        navigate('/homepage'); // Redirect to homepage if login is successful
+        if (rememberMe) {
+          localStorage.setItem("email", email);
+          localStorage.setItem("password", password); // Save password (Not secure, just for example)
+        } else {
+          localStorage.removeItem("email"); // Clear email if "Remember Me" is unchecked
+          localStorage.removeItem("password"); // Clear password if "Remember Me" is unchecked
+        }
+
+
+        navigate('/home-page'); // Redirect to homepage if login is successful
       } else {
         setErrorMessage(response.data.message || "Login failed. Please check your credentials.");
       }
@@ -59,6 +80,15 @@ const LoginPageConsumer = () => {
     if (email === "37925@riphah.edu.pk" && password === "JSM123@") {
       navigate('/home'); // Navigate to Admin page
     }
+  };
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
   };
 
   return (
@@ -95,22 +125,37 @@ const LoginPageConsumer = () => {
                   />
                 </div>
 
-                <div className="form-outline mb-4">
+                 <div className="form-outline mb-4">
                   <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <div className="password-field">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control form-control-lg"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      onClick={togglePasswordVisibility}
+                      className="eye-icon"
+                    />
+                  </div>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <div className="form-check">
-                    <input className="form-check-input" type="checkbox" id="form1Example3" />
-                    <label className="form-check-label" htmlFor="form1Example3"> Remember me </label>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="form1Example3"
+                      checked={rememberMe}
+                      onChange={handleRememberMeChange}
+                    />
+                    <label className="form-check-label" htmlFor="form1Example3">
+                      Remember me
+                    </label>
                   </div>
                   <a href="/consumersignup">Create Account?</a>
                 </div>

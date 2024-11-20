@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import logo from '../assests/images/logo.png';
-import './Headeradmin.css';
+import '../component/Headeradmin.css';
 
 const Headeradmin = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [notification, setNotification] = useState(null);
+  const navigate = useNavigate();
 
   // Fetch pending requests
   const fetchRequests = async () => {
@@ -22,14 +25,21 @@ const Headeradmin = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
+  const showNotification = (type, message) => {
+    setNotification({ type, message });
+    setTimeout(() => {
+        setNotification(null); // Automatically remove the notification after 2 seconds
+    }, 2000);
+};
+
   // Handle approve action
   const handleApprove = async (id) => {
     try {
       await axios.post(`http://localhost:5000/api/Admin/accept/${id}`, { isAccepted: true });
-      alert('Provider approved!');
+      showNotification('success', ' Approved!');
       setPendingRequests(pendingRequests.filter(request => request._id !== id));
     } catch (error) {
-      alert('Error approving provider.');
+      setNotification({ type: 'error', message: 'Error approving the request.' });
     }
   };
 
@@ -37,39 +47,47 @@ const Headeradmin = () => {
   const handleReject = async (id) => {
     try {
       await axios.post(`http://localhost:5000/api/Admin/accept/${id}`, { isAccepted: false });
-      alert('Provider rejected!');
+      showNotification('success', 'Rejected!');
       setPendingRequests(pendingRequests.filter(request => request._id !== id));
     } catch (error) {
-      alert('Error rejecting provider.');
+      setNotification({ type: 'error', message: 'Error rejecting the request.' });
     }
   };
 
-  // Handle download action
-  const handleDownload = async (filePath) => {
+ 
+  const handleDownload = async (url) => {
     try {
-      const response = await axios.get(filePath, { responseType: 'blob' });
-      if (response.status === 200) {
-        const contentType = response.headers['content-type'];
-        const blob = new Blob([response.data], { type: contentType });
-        const downloadLink = document.createElement('a');
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = filePath.split('/').pop();
-        downloadLink.click();
-        URL.revokeObjectURL(downloadLink.href);
-      } else {
-        console.error('Error: Unexpected response status', response.status);
-        alert('Unexpected error occurred. Please try again.');
-      }
+        // Making the GET request to fetch the file
+        const response = await axios.get(url, { responseType: 'blob' });
+
+        // Create a Blob from the response data
+        const blob = new Blob([response.data], { type: response.headers['content-type'] });
+
+        // Create a link element
+        const link = document.createElement('a');
+        
+        // Extract the file name from the URL (handle different formats)
+        const fileName = url.split('/').pop();
+        link.href = window.URL.createObjectURL(blob);
+        
+        // Set the download attribute to prompt file download with original name
+        link.download = fileName;
+
+        // Trigger the download by clicking the link
+        link.click();
     } catch (error) {
-      console.error('Download failed:', error);
-      alert('Error downloading file. Please try again.');
+        alert('Error downloading file.');
     }
-  };
-  
+};
+
 
   useEffect(() => {
     fetchRequests(); // Fetch pending requests when component mounts
   }, []);
+
+  const handleLogout = () => {
+    navigate('/login');
+};
 
   return (
     <header className="header">
@@ -103,7 +121,7 @@ const Headeradmin = () => {
             
                     <p><strong>CNIC (Back):</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicBack/${providerId._id}`)} 
+                         onClick={() => handleDownload(`http://localhost:5000/api/Provider/download/cnicBack/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
@@ -111,7 +129,7 @@ const Headeradmin = () => {
 
                     <p><strong>CNIC (Front):</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Admin/download/cnicFront/${providerId._id}`)} 
+                        onClick={() => handleDownload(`http://localhost:5000/api/Provider/download/cnicFront/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
@@ -119,7 +137,7 @@ const Headeradmin = () => {
 
                     <p><strong>Police Certificate:</strong>
                       <span 
-                        onClick={() => handleDownload(`http://localhost:5000/api/Provider/download/clearanceCertificate/${providerId._id}`)} 
+                        onClick={() => handleDownload(`http://localhost:5000/api/Provider/download/policeCertificate/${providerId._id}`)} 
                         className="download-link">
                         Download
                       </span>
@@ -139,12 +157,20 @@ const Headeradmin = () => {
           )}
         </div>
 
-        <a href="#blockuser">Block Account</a>
-        <a href="#contact">Contact Us</a>
+        <a href="#blocklist">Block Account</a>
+        <a href="#footer">Contact Us</a>
       </nav>
       <div className="search-login d-flex align-items-center">
-        <button className="btn btn-primary" onClick={() => window.location.href='/login'}>Logout</button>
+      <div className="admin-label">Admin</div>
+      <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
       </div>
+      
+      {notification && (
+                <div className={`notification ${notification.type}`}>
+                    {notification.message}
+                </div>
+            )}
+            
     </header>
   );
 };

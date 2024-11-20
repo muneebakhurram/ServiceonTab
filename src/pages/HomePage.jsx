@@ -1,5 +1,5 @@
 import React from 'react';
-import decore from '../assests/images/Rectangle 1.png';
+import { useNavigate } from 'react-router-dom';
 import image from '../assests/images/main.png';
 import electrtion from '../assests/images/Electrtion.png';
 import plumber from '../assests/images/plumber.png';
@@ -12,13 +12,18 @@ import Footer from '../component/Footer.jsx';
 import '../styles/HomePage.css';
 
 function HomePage() {
+  const navigate = useNavigate(); 
+  const handleServiceClick = (type) => {
+    navigate(`/services/${type.toLowerCase()}`); // Navigate to the dynamic route
+  };
+
   return (
       <div>
           <Headeruser />
           
           {/* main contanier */}
-          <div className="service-container">
-              <div className="text-section">
+          <div id="home" className="service-container">
+              <div  className="text-section">
                   <h1 className="main-heading">Simplify Your Life with Our Professional Home Service</h1>
                   <p className="sub-heading">Bringing ease, comfort, and quality service right to your</p>
                   <p className="highlight-text"> doorstep.We offer homeservices designed to maximize</p>
@@ -38,15 +43,15 @@ function HomePage() {
               <h2 className="services-heading">Our Services</h2>
               <img src={line} alt="Line Design" className="line-image" /> 
               <div className="services-boxes">
-                  <div className="service-box">
+              <div className="service-box" onClick={() => handleServiceClick('Plumber')}> {/* Added onClick */}
                       <img src={plumber} alt="Plumber" className="service-image" />
                       <p className="service-text">Plumber</p>
                   </div>
-                  <div className="service-box">
+                  <div className="service-box" onClick={() => handleServiceClick('Electrician')}> {/* Added onClick */}
                       <img src={electrtion} alt="Electrician" className="service-image" />
                       <p className="service-text">Electrician</p>
                   </div>
-                  <div className="service-box">
+                  <div className="service-box" onClick={() => handleServiceClick('Mechanic')}> {/* Added onClick */}
                       <img src={mechnic} alt="Mechanic" className="service-image" />
                       <p className="service-text">Mechanic</p>
                   </div>

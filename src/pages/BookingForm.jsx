@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Headeruser from '../component/Headeruser';
 import Footer from '../component/Footer';
 import '../styles/BookingForm.css';
-import { useNavigate } from 'react-router-dom';
+
+
 
 const BookingForm = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { serviceName, estimatedCharges } = location.state || {}; 
+
     const [formData, setFormData] = useState({
-        serviceName: '',
+        serviceName:  serviceName || '',
         problemDescription: '',
-        estimatedCharges: '',
+        estimatedCharges:  estimatedCharges || '',
         date: '',
         time: '',
         serviceLevel: '',
     });
     const [image, setImage] = useState(null);
-
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,19 +53,7 @@ const BookingForm = () => {
             if (result.success) {
                 alert("Booking created successfully!");
                 
-                // Reset the form and image
-                setFormData({
-                    serviceName: '',
-                    problemDescription: '',
-                    estimatedCharges: '',
-                    date: '',
-                    time: '',
-                    serviceLevel: '',
-                });
-                setImage(null);
-
-                // Navigate to display booking page
-                navigate('/displayBooking');  // Update with the actual route for the display booking page
+                navigate('/displayBooking');  
             } else {
                 alert(result.message);
             }
@@ -82,8 +75,7 @@ const BookingForm = () => {
                             type="text"
                             name="serviceName"
                             value={formData.serviceName}
-                            onChange={handleChange}
-                            required
+                            readOnly
                         />
                     </div>
                     <div className="form-group">
@@ -101,8 +93,7 @@ const BookingForm = () => {
                             type="text"
                             name="estimatedCharges"
                             value={formData.estimatedCharges}
-                            onChange={handleChange}
-                            required
+                            readOnly
                         />
                     </div>
                     <div className="form-group">

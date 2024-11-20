@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../component/Header.jsx';   
 import Footer from '../component/Footer.jsx';   
 import landingpic from '../assests/images/landingpic.png'
 import '../styles/mainpage.css';   
 
-const mainpage = () => {
+const MainPage = () => {
+    const navigate = useNavigate(); 
+
+    const handleSignUpClick = () => {
+        navigate('/signupform'); // Navigate to the signup form
+    };
+
     return (
         <div className="landing-page">
             <Header />
@@ -15,7 +22,7 @@ const mainpage = () => {
                 <p className="sub-headings">We offer home services designed to maximize efficiency,</p>
                 <p className="highlight">minimizing time, energy, and cost.</p>
                 
-                <button className="signup-btn">Sign up</button>
+                 <button className="signup-btn" onClick={handleSignUpClick}>Sign up</button>
                 <p className="log-in-text">
                     Do you have an account? <a href="/login">Login</a>
                 </p>
@@ -27,4 +34,4 @@ const mainpage = () => {
         </div>
     );
 };
-export default mainpage
+export default MainPage;

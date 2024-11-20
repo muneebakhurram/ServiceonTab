@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../component/Footer';
 import Headeruser from '../component/Headeruser';
-import { useParams } from 'react-router-dom';  // Import useParams hook
 import '../styles/DisplayServices.css';
-import decore from '../assests/images/Rectangle 1.png';
 import mainpic from '../assests/images/main.png';
 
 function DisplayServices() {
-  const { type } = useParams();  // Get the service type from URL parameter
+  const { type } = useParams();  
   const [services, setServices] = useState([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true); // Manage loading state
+  const [loading, setLoading] = useState(true); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchServices = async () => {
-      setLoading(true); // Set loading to true
+      setLoading(true); 
       try {
         const response = await fetch('http://localhost:5000/api/Addservice/all');
         const data = await response.json();
         if (data.success) {
-          // Filter services by type (Plumber, Electrician, etc.)
+          // Filter services by type (Plumber, Electrician.)
           const filteredServices = data.services.filter(service =>
             service.type.toLowerCase() === type.toLowerCase()
           );
@@ -36,13 +36,24 @@ function DisplayServices() {
     };
 
     fetchServices();
-  }, [type]); // Re-fetch services whenever the type changes
+  }, [type]); 
+
+  const handleBookNow = (service) => {
+    navigate('/booking-form', {
+      state: {
+        serviceId: service._id,
+        serviceName: service.name,
+        estimatedCharges: service.estimatedCharges,
+      },
+    });
+  };
+
 
   return (
     <div className="display-services">
       <Headeruser />
-       {/* main container */}
-       <div className="service-container">
+   
+       <div id="home" className="service-container">
         <div className="text-section">
           <h1 className="main-heading">Simplify Your Life with Our Professional Home Service</h1>
           <p className="sub-heading">Bringing ease, comfort, and quality service right to your</p>
@@ -59,7 +70,7 @@ function DisplayServices() {
       <div className="home-container">
         <div className="home-content">
           <h2 className="services-title">{type.charAt(0).toUpperCase() + type.slice(1)} Services</h2>
-          <div className="services-card-container">
+          <div  className="services-card-container">
             {loading && <p>Loading services...</p>}
             {error && <p className="error-message">{error}</p>}
             {services.length > 0 ? (
@@ -68,24 +79,29 @@ function DisplayServices() {
                  
                  
                  {service.picture ? (
-  <img
+  <img 
     src={`http://localhost:5000/${service.picture}`}
     alt={service.name}
     className="service-image"
+    
   />
 ) : (
   <div className="no-image-placeholder">No Image Available</div>
 )}
                   
-                  {/* Service Info */}
-                  <div className="service-info">
+                
+                  <div  className="service-info">
                     <h3 className="service-name">{service.name}</h3>
                     <p className="service-price">Rs. {service.estimatedCharges}</p>
                     <p className="service-estimate">Estimated</p> {/* Additional text to show "Estimated" */}
                   </div>
+                  <button
+                    className="book-now"
+                    onClick={() => handleBookNow(service)}
+                  >
+                    Book Now
+                  </button>
                   
-                  {/* Book Now Button */}
-                  <button className="book-now">Book Now</button>
                 </div>
               ))
             ) : (

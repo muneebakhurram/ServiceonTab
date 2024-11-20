@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../component/Servicesheader';
+import Headerserviceprovider from '../component//HeaderServicerpovider' ;
 import Footer from '../component/Footer';
 import '../styles/Addservice.css';
 
@@ -64,9 +64,7 @@ const AddService = () => {
         setSuccess("Service added successfully!");
         setError('');
         setService(initialState); // Reset form after success
-
-        // Redirect to the relevant service category page
-        navigate(`/services/${service.type.toLowerCase()}`);  // Redirect based on the service type
+         // Redirect based on the service type
       } else {
         setError(result.message);
         setSuccess('');
@@ -79,7 +77,7 @@ const AddService = () => {
 
   return (
     <>
-      <Header />
+     <Headerserviceprovider  />
       <div className="add-service-container">
         <h2>Add New Service</h2>
         {success && <p className="success">{success}</p>}

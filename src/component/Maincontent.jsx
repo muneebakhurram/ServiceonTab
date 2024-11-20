@@ -14,7 +14,7 @@ const MainContent = () => {
 
     return (
         <div>
-            <div className="service-container">
+            <div id="home" className="service-container">
                 <div className="text-section">
                     <h1 className="main-heading">Expert Management of<br /> Home Service Providers</h1>
                     <p className="sub-heading">Efficiently overseeing service providers ensures</p>
@@ -27,18 +27,18 @@ const MainContent = () => {
                 </div>
             </div>
 
-            <div className="cards-container">
+            <div  className="cards-container">
                 <div className="card">
-                    <h3>Accept Requests</h3>
+                    <h3>Manage Provider</h3>
                   
-                    <button className="btn btn-primary" onClick={handleAcceptRequest}>View Requests</button>
+                    <button className="btn btn-primary" onClick={handleAcceptRequest}>View Rating</button>
                 </div>
                 <div className="card">
-                    <h3>Verify Account</h3>
+                    <h3>Manage Consumer</h3>
                   
-                    <button className="btn btn-primary" onClick={handleVerifyService}>View Providers</button>
+                    <button className="btn btn-primary" onClick={handleVerifyService}>View Consumer</button>
                 </div>
-                <div className="card">
+                <div id="blocklist" className="card">
                     <h3>Block Account</h3>
                   
                     <button className="btn btn-danger" onClick={handleBlockService}>View Blocked Users</button>

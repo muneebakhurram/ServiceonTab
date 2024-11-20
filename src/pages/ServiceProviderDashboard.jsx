@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import Headerserviceprovider from '../component//HeaderServicerpovider' ;// Adjust the path if necessary
-import Footer from '../component/Footer'; // Adjust the path if necessary
-import '../styles/serviceproviderdashboard.css'; // Reuse the existing CSS
-import decore from '../assests/images/decore.png';
+import { useNavigate } from 'react-router-dom'; 
+import Headerserviceprovider from '../component//HeaderServicerpovider' ;
+import Footer from '../component/Footer'; 
+import '../styles/serviceproviderdashboard.css'; 
 import mainpic from '../assests/images/addservices.png';
 const ServiceProviderDashboard = ({ user }) => {
-    const [services, setServices] = useState([]); // State to manage services
+
+    const [services, setServices] = useState([]); //manage services
+    const navigate = useNavigate();
+
+  
 
     const addService = () => {
-        // Logic to add a service
-        const newService = prompt("Enter the service name:"); // Simple prompt to add a service
-        if (newService) {
-            setServices([...services, newService]); // Add service to the list
-        }
+      
+        navigate('/add-service');
     };
 
     return (
         <div>
-            {/* Header */}
-            <Headerserviceprovider user={user} onLogout={() => {}} />
+          
+            <Headerserviceprovider  />
 
             <div className="service-container">
-                <div className="text-section">
+                <div id="home" className="text-section">
                     <h1 className="main-heading">Simplify Your Life with Our Professional Home Service</h1>
                     <p className="sub-heading">We offer home services designed to maximize efficiency,</p>
                     <p className="highlight-text">minimizing time, energy, and cost.</p>
@@ -32,28 +33,18 @@ const ServiceProviderDashboard = ({ user }) => {
                 </div>
             </div>
 
-            {/* Body Section with Card */}
+          
             <main className="main-content">
             <h2 className="services-heading">Add Services</h2>
                 <section id="add-service" className="card-section">
-                    <div className="service-card">
-                        <button onClick={addService} className="add-service-button">+</button>
+                    <div id="aservice"  className="service-card">
+                    <button onClick={addService} className="add-service-button">+</button>
                     </div>
-                    <div className="service-list">
-                        {services.length > 0 ? (
-                            services.map((service, index) => (
-                                <div key={index} className="service-item">
-                                    {service}
-                                </div>
-                            ))
-                        ) : (
-                            <p className="service-text">No service added</p> // Placeholder text
-                        )}
-                    </div>
+                 
                 </section>
             </main>
 
-            {/* Footer */}
+         
             <Footer />
         </div>
     );
