@@ -51,7 +51,7 @@ function DisplayServices() {
         </div>
                 
         <div className="image-section">
-          <img src={decore} alt="Background Design" className="background-decore" />
+         
           <img src={mainpic} alt="Handyman with tools" className="main-pic" />
         </div>
       </div>
@@ -67,17 +67,15 @@ function DisplayServices() {
                 <div key={service._id} className="service-card">
                  
                  
-                  
-                  {/* Service Image */}
-                  {service.picture ? (
-                    <img
-                      src={`http://localhost:5000${service.picture}`}
-                      alt={service.name}
-                      className="service-image"
-                    />
-                  ) : (
-                    <div className="no-image-placeholder">No Image Available</div>
-                  )}
+                 {service.picture ? (
+  <img
+    src={`http://localhost:5000/${service.picture}`}
+    alt={service.name}
+    className="service-image"
+  />
+) : (
+  <div className="no-image-placeholder">No Image Available</div>
+)}
                   
                   {/* Service Info */}
                   <div className="service-info">

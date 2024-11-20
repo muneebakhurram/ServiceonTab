@@ -31,13 +31,14 @@
     margin-bottom: 10px;
 }
 
-.image {
+.image-section {
     position: relative;
     width: 45%; /* Increase width for better alignment */
     text-align: center;
     margin-left: 3%;
     display: flex;
     align-items: center; /* Center content vertically */
+    z-index: 0;
 }
 
 .background{
@@ -48,7 +49,7 @@
     left: 0;
     z-index: 1;
     opacity: 1; /* Full opacity */
-  
+    margin-top: -50px; 
 }
 
 .cards-container {
@@ -58,7 +59,6 @@
     width: 100%;
     max-width: 1200px;
     margin-top: 20px;
- margin-right: 47px;
 }
 
 .card {
@@ -70,7 +70,7 @@
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.2s ease;
-    height: 130px;
+    height: 190px;
 }
 
 .card:hover {

@@ -8,40 +8,56 @@
 .login-form-shadow {
   background-color: white;
   border-radius: 10px;
-  padding: 40px; /* Adjust padding for responsiveness */
+  padding: 60px; /* Increased padding for more height */
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
-  min-height: 400px;
+  min-height: 400px; /* Optional: Set a minimum height */
 }
 
 /* Full width of login button with increased size */
 .login-btn {
   width: 100%;
-  padding: 12px; /* Adjust padding for mobile */
-  font-size: 18px; /* Smaller font size for mobile */
+  padding: 15px;
+  font-size: 20px;
 }
 
 /* Adjust spacing between the fields and their labels */
 .form-outline {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-outline label {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 
 .form-outline input {
-  font-size: 16px; /* Slightly larger for better readability */
+  font-size: 14px;
   padding: 10px;
 }
 
 /* Image styling */
 .login-image {
-  width: 100%; /* Ensure full width on all screens */
+  max-width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
+/* Make form responsive for smaller screens */
+@media (max-width: 768px) {
+  .login-page-consumer .container {
+    padding: 20px;
+  }
+
+  /* Center the image and form on smaller screens */
+  .login-form-shadow {
+    margin-top: 20px;
+  }
+
+  .login-image {
+    display: none; /* Hide the image on smaller screens */
+  }
+}
+
+/* Error message styling */
 .error-message {
   color: red;
   font-weight: normal;
@@ -55,56 +71,4 @@
   font-weight: normal;
   margin-bottom: 15px; 
   text-align: center;
-}
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .login-page-consumer .container {
-    padding: 15px; /* Reduce padding for smaller screens */
-  }
-
-  .row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .col-md-6 {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Adjust login form shadow padding for smaller screens */
-  .login-form-shadow {
-    padding: 20px; /* Reduce padding for better fit on mobile */
-  }
-
-  /* Show image and ensure it stays responsive on mobile */
-  .login-image {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Adjust the input fields and button for smaller screens */
-  .form-outline input {
-    font-size: 14px;
-    padding: 8px; /* Reduce padding slightly */
-  }
-
-  .login-btn {
-    font-size: 16px;
-    padding: 10px;
-  }
-
-  /* Error message styling */
-  .error-message {
-    font-size: 14px;
-    margin-bottom: 10px; /* Adjust spacing for mobile */
-  }
-}
-
-/* Error message styling */
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-bottom: 15px;
 }

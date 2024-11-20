@@ -2,7 +2,7 @@ import React from "react";
 import logo from '../assests/images/logo.png';
 import "./Servicesheader.css";
 
-const Serviceheader = () => {
+const Servicesheader = () => {
     return (
         <header className="header">
             <div className="logo">
@@ -26,4 +26,4 @@ const Serviceheader = () => {
     );
 };
 
-export default Serviceheader;
+export default Servicesheader;

@@ -3,7 +3,7 @@ import Headerserviceprovider from '../component//HeaderServicerpovider' ;// Adju
 import Footer from '../component/Footer'; // Adjust the path if necessary
 import '../styles/serviceproviderdashboard.css'; // Reuse the existing CSS
 import decore from '../assests/images/decore.png';
-import mainpic from '../assests/images/pngegg.png';
+import mainpic from '../assests/images/addservices.png';
 const ServiceProviderDashboard = ({ user }) => {
     const [services, setServices] = useState([]); // State to manage services
 
@@ -27,13 +27,14 @@ const ServiceProviderDashboard = ({ user }) => {
                     <p className="highlight-text">minimizing time, energy, and cost.</p>
                 </div>
                 <div className="image-section">
-                    <img src={decore} alt="Background Design" className="background-decore" />
-                    <img src={mainpic} alt="Handyman with tools" className="main-pic" />
+                   
+                    <img src={mainpic} alt="Handyman with tools" className="main" />
                 </div>
             </div>
 
             {/* Body Section with Card */}
             <main className="main-content">
+            <h2 className="services-heading">Add Services</h2>
                 <section id="add-service" className="card-section">
                     <div className="service-card">
                         <button onClick={addService} className="add-service-button">+</button>
