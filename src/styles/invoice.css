@@ -1,0 +1,81 @@
+.invoice-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .invoice-header h2 {
+    color: #333;
+  }
+  
+  .temp-receipt {
+    color: #d9534f;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .date-time {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .invoice-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .invoice-details th {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* ✅ نیچے لائن لگا دی گئی ہے */
+  }
+  
+  .invoice-details td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* ✅ ہر row کے نیچے لائن ہوگی */
+  }
+  
+  .invoice-total {
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .invoice-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .invoice-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .view-button {
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .download-button {
+    background: #28a745;
+    color: #fff;
+  }
+  
+  .invoice-buttons button:hover {
+    opacity: 0.8;
+  }
+ 

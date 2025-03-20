@@ -1,0 +1,128 @@
+.add-to-favorite {
+  padding: 20px;
+  background-color: #ffffff; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorites-container {
+  max-width: 1200px;
+  margin: 40px auto; 
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+  border: 2px solid #ddd; 
+}
+
+.favorites-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favorite-service-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 2px solid #ddd; 
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.favorite-service-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-service-image {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.favorite-service-info {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.favorite-service-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.favorite-service-price {
+  font-size: 1rem;
+  color: #555;
+}
+
+.favorite-icon {
+  color: red;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .favorite-service-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .favorite-service-image {
+      margin-bottom: 10px;
+  }
+}
+
+
+.remove-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color:black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}

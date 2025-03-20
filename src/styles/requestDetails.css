@@ -1,0 +1,154 @@
+.request-details-container {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.request-details-container:hover {
+    transform: scale(1.01);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 18px;
+    letter-spacing: 0.8px;
+}
+
+.details-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.details-card:hover {
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.services-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    transition: transform 0.3s ease-in-out;
+}
+
+.services-image:hover {
+    transform: scale(1.05);
+}
+
+.info {
+    flex: 1;
+}
+
+.info p {
+    font-size: 15px;
+    margin: 5px 0;
+    color: #444;
+    line-height: 1.5;
+}
+
+.status {
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.status.pending {
+    background: rgba(0, 91, 187, 0.1);
+    color: #007bff;
+}
+
+.status.accepted {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status.rejected {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.status:hover {
+    transform: scale(1.05);
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #222;
+}
+
+.consumer-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 12px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.consumer-card:hover {
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+.consumer-card::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 123, 255, 0.05);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.consumer-card p {
+    font-size: 15px;
+    margin: 5px 0;
+    color: #333;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+.consumer-card p span {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.loading, .error {
+    text-align: center;
+    font-size: 16px;
+    color: #ff5733;
+    margin-top: 18px;
+    font-weight: 600;
+}
